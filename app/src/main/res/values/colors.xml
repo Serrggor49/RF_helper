@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+
+    <color name="color_primary_green">#18450E</color>
+    <color name="color_primary_dark">#0E260B</color>
+    <color name="color_primary_dark2">#260B0D</color>
+    <color name="color_accent">#006c34</color>
+    <color name="color_primary_3">#00897B</color>
+    <color name="color_primary_dark_3">#00695C</color>
+    <color name="color_accent_3">#FFFFFF</color>
+    <color name="window_background_3">#97ffffff</color>
+    <color name="text_color_primary_3">#FFFFFF</color>
+    <color name="text_color_secondary_3">#B3FFFFFF</color>
+    <color name="color_primaryo">#0B0101</color>
+    <color name="md_ripple_material_dark">#E6E4E4</color>
+    <color name="color_primary_dark_4">#4bbf6c</color>
+    <color name="tint">#83203b1f</color>
+    <color name="clear">#00FFFFFF</color>
+    <color name="pokazat_ingredienty">#0645AD</color>
+    <color name="gray">#f1303030</color>
+    <color name="color_primary">#18450e</color>
+    <color name="ne_najata">#FFFFFFFF</color>
+    <color name="najata">#C9CCC8</color>
+    <color name="white_gray">#F7F7F7</color>
+    <color name="Black">#000000</color>
+    <color name="clear_status_bar">#4D153015</color>
+    <color name="green_button">#368F65</color>
+    <color name="color_opisanie">#6D6D6D</color>
+    <color name="gray_line">#9E9E9E</color>
+    <color name="green_zagolovok">#19A25F</color>
+    <color name="prozrachniy">#00FFFFFF</color>
+
+</resources>
