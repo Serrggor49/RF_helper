@@ -3,113 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    tools:context=".articles.Articles">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white_gray"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
 
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:scrollIndicators="end"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:scrollbars="none">
 
-            <ImageButton
-                android:id="@+id/imageButton64"
+            <LinearLayout
+                android:id="@+id/lin_o"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ripple"
-                android:clickable="true"
-                android:onClick="open_articles_new"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon_articles" />
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/imageButton75"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ripple"
-                android:clickable="true"
-                android:onClick="open_recipes_categories_new"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon_recipes" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/square_button"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
-        </LinearLayout>
+                    <ImageView
+                        android:id="@+id/imageView8111"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/imageButton67"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ripple"
-                android:onClick="open_News_lenta"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon_news" />
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp"
+                            android:text="Отдельно о веганстве"
+                            android:textColor="@color/Black"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/imageButton73"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ripple"
-                android:onClick="open_rations"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon_rations" />
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp"
+                            android:text="Кто такой веган и чем он отличается от вегетарианца?"
+                            android:textColor="@color/color_primaryo"
+                            android:visibility="gone" />
+                    </LinearLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+                </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ripple"
-                android:onClick="open_Tovary"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon_products" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ripple"
-                android:onClick="open_other_new"
-                android:scaleType="fitXY"
-                android:src="@drawable/ikon_other" />
-
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
