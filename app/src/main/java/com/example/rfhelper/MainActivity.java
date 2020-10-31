@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         BUTON_HEIGHT = WIDTH_DISPLAY/HEIGHT_COEFFICIENT;
 
 
-        buttons_generate(R.drawable.fresnel, "Расчет зоны Френеля", method_lit);
+        buttons_generate(R.drawable.fresnel, "Расчет зоны Френеля", openFresnel);
         buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", method_veganskie_dobavki);
         buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", method_films);
         buttons_generate(R.drawable.antenna, "КСВ -> дБ", method_map);
@@ -56,10 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    View.OnClickListener method_lit = new View.OnClickListener() {  // обработка кнопки "Литература"
+    View.OnClickListener openFresnel = new View.OnClickListener() {  // калькулятор Френеля
         @Override
         public void onClick(View v) {
 
+            startActivity(new Intent(MainActivity.this, FresnelZone.class));
 //            MainActivity.list = (new Literature_date_new()).get_list_literature();
 //            MainActivity.setHEIGHT_COEFFICIENT((new Literature_date_new()).getHEIGHT_COEFFICIENT());
 //            MainActivity.setRADIUS(new Literature_date_new().getRADIIUS());
