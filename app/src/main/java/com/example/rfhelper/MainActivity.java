@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         buttons_generate(R.drawable.fresnel, "Расчет зоны Френеля", openFresnel);
-        buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", method_veganskie_dobavki);
+        buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", openDistanceHorizont);
         buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", method_films);
         buttons_generate(R.drawable.antenna, "КСВ -> дБ", method_map);
         buttons_generate(R.drawable.watts, "дБмВт -> Вт", method_ethic);
@@ -61,23 +61,17 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             startActivity(new Intent(MainActivity.this, FresnelZone.class));
-//            MainActivity.list = (new Literature_date_new()).get_list_literature();
-//            MainActivity.setHEIGHT_COEFFICIENT((new Literature_date_new()).getHEIGHT_COEFFICIENT());
-//            MainActivity.setRADIUS(new Literature_date_new().getRADIIUS());
-//            MainActivity.setFullsreen(new Literature_date_new().getFullsreen());
-//            MainActivity.setTitle(new Literature_date_new().getTitle());
-//            MainActivity.setTYPE(new Literature_date_new().getTYPE());
-//            startActivity(new Intent(Other_menu_new.this, MainActivity.class));
+
 
         }
     };
 
 
 
-    View.OnClickListener method_veganskie_dobavki = new View.OnClickListener() {  // обработка кнопки "Литература"
+    View.OnClickListener openDistanceHorizont = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
-           // startActivity(new Intent(Other_menu_new.this, E_dobavki.class));
+            startActivity(new Intent(MainActivity.this, DistanceGorizont.class));
         }
     };
 
