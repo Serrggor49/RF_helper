@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         WIDTH_DISPLAY = size.x;
-        BUTON_HEIGHT = WIDTH_DISPLAY/HEIGHT_COEFFICIENT;
+        BUTON_HEIGHT = WIDTH_DISPLAY / HEIGHT_COEFFICIENT;
 
 
         buttons_generate(R.drawable.fresnel, "Расчет зоны Френеля", openFresnel);
         buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", openDistanceHorizont);
-        buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", method_films);
+        buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", openSignalLossDistance);
         buttons_generate(R.drawable.antenna, "КСВ -> дБ", method_map);
         buttons_generate(R.drawable.watts, "дБмВт -> Вт", method_ethic);
 
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         buttons_generate(R.drawable.waves, "Длина волны по частоте", method_vita);
 
     }
-
 
 
     View.OnClickListener openFresnel = new View.OnClickListener() {  // калькулятор Френеля
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
     View.OnClickListener openDistanceHorizont = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
@@ -76,22 +74,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    View.OnClickListener method_films = new View.OnClickListener() {  // обработка кнопки "Литература"
+    View.OnClickListener openSignalLossDistance = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
-//            MainActivity.list = (new Video_date_new()).get_list_video();
-//            MainActivity.setHEIGHT_COEFFICIENT((new Video_date_new()).getHEIGHT_COEFFICIENT());
-//            MainActivity.setRADIUS(new Video_date_new().getRADIIUS());
-//            MainActivity.setFullsreen(new Video_date_new().getFullsreen());
-//            MainActivity.setTitle(new Video_date_new().getTitle());
-//            MainActivity.setTYPE(new Video_date_new().getTYPE());
-//
-//            startActivity(new Intent(Other_menu_new.this, MainActivity.class));
+
+            startActivity(new Intent(MainActivity.this, SignalLossDistance.class));
+
         }
     };
-
-
-
 
 
     View.OnClickListener method_map = new View.OnClickListener() {  // обработка кнопки "Литература"
@@ -114,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener method_calculator = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
-       //     startActivity(new Intent(Other_menu_new.this, Kalculator_jizney_odin.class));
+            //     startActivity(new Intent(Other_menu_new.this, Kalculator_jizney_odin.class));
         }
     };
 
@@ -122,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener method_ethic = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
-     //       startActivity(new Intent(Other_menu_new.this, Ethic_firm.class));
+            //       startActivity(new Intent(Other_menu_new.this, Ethic_firm.class));
 
         }
     };
@@ -138,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(new Intent(Other_menu_new.this, URL_obshee.class));
         }
     };
-
 
 
     public void buttons_generate(int image, String name_button, View.OnClickListener method) {
@@ -175,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         textView_zagolovok.setTextColor(getColor(R.color.Black));
         textView_zagolovok.setTextSize(TEXT_ZAGOLOVOK_SIZE);
         textView_zagolovok.setGravity(Gravity.CENTER_VERTICAL);
-        textView_zagolovok.setPadding(25,0,0,0);
+        textView_zagolovok.setPadding(25, 0, 0, 0);
 
         LinearLayout.LayoutParams params_for_text1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, MATCH_PARENT);
         textView_zagolovok.setLayoutParams(params_for_text1);
