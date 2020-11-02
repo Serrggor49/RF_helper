@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         buttons_generate(R.drawable.fresnel, "Расчет зоны Френеля", openFresnel);
         buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", openDistanceHorizont);
         buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", openSignalLossDistance);
-        buttons_generate(R.drawable.antenna, "КСВ -> дБ", method_map);
+        buttons_generate(R.drawable.antenna, "КСВ -> дБ", openSwrToPower);
         buttons_generate(R.drawable.watts, "дБмВт -> Вт", method_ethic);
 
         buttons_generate(R.drawable.battery, "Расчет разряда батареи", method_calculator);
@@ -84,16 +84,11 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    View.OnClickListener method_map = new View.OnClickListener() {  // обработка кнопки "Литература"
+    View.OnClickListener openSwrToPower = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
 
-//            URL_obshee.open_in_apk = true;
-//            //URL_obshee.URL = ("https://justveg.ru/page12216270.html"); // правильный вариант
-//            URL_obshee.URL = ("https://justveg.ru/page14436191.html#commento-login-box-container"); // тест
-//            URL_obshee.activity_name = "Вег заведения";
-//            URL_obshee.setTitle("<font color='#18450e'>Вег заведения</font>");
-//            startActivity(new Intent(Other_menu_new.this, URL_obshee.class));
+            startActivity(new Intent(MainActivity.this, SwrToPower.class));
 
         }
     };
