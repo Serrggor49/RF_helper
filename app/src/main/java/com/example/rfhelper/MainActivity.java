@@ -47,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
         buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", openDistanceHorizont);
         buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", openSignalLossDistance);
         buttons_generate(R.drawable.antenna, "КСВ -> дБ", openSwrToPower);
-        buttons_generate(R.drawable.watts, "дБмВт -> Вт", method_ethic);
-
-        buttons_generate(R.drawable.battery, "Расчет разряда батареи", method_calculator);
+        buttons_generate(R.drawable.watts, "дБмВт -> Вт", openDecibelToWatt);
+        buttons_generate(R.drawable.battery, "Таблица частот", openDecibelToWatt);
         buttons_generate(R.drawable.waves, "Длина волны по частоте", method_vita);
 
     }
@@ -96,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
     // https://tilda.cc/page/?pageid=12216270&previewmode=yes
 
 
-    View.OnClickListener method_calculator = new View.OnClickListener() {  // обработка кнопки "Литература"
+    View.OnClickListener openDecibelToWatt = new View.OnClickListener() {  // обработка кнопки "Литература"
         @Override
         public void onClick(View v) {
-            //     startActivity(new Intent(Other_menu_new.this, Kalculator_jizney_odin.class));
+            startActivity(new Intent(MainActivity.this, DecibelToWatt.class));
         }
     };
 
