@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="signal_loss_distance">
+Если сигнал летит далеко - то он тухнет как рыба
+
+    </string>
+
+
+</resources>
