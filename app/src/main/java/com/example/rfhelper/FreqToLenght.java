@@ -3,12 +3,15 @@ package com.example.rfhelper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class FreqToLenght extends AppCompatActivity {
+
+    int descriptions_fresnel = R.string.freq_to_lenght; // текст с описанием
 
     EditText freqEditText;  // поле ввода частоты;
     TextView lenghtWave; // результат вычислений
@@ -20,7 +23,16 @@ public class FreqToLenght extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freq_to_lenght);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
+        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Расчет длины волны</font>"));
+
+        TextView description = findViewById(R.id.description_id); // описание
+        description.setText(descriptions_fresnel);
+
     }
+
+    @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; } // обработка назад в toolbar
 
 
     public void refresh(){

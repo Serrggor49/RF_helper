@@ -3,6 +3,7 @@ package com.example.rfhelper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,12 +23,16 @@ public class DistanceGorizont extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance_gorizont);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
+        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Дальность видимости</font>"));
 
         description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
         description.setText(descriptionsDistanceGorizont);
 
     }
 
+    @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; } // обработка назад в toolbar
 
 
 
@@ -38,7 +43,7 @@ public class DistanceGorizont extends AppCompatActivity {
 
         Double result = (   3.57*(Math.sqrt(heightFirstAnt) + Math.sqrt(heightSecondtAnt)) );
 
-        textView_result.setText( "Дальность радиогоризонта составляет - " + (String.format("%.1f", result)) + " км.");
+        textView_result.setText( "Дальность видимости - " + (String.format("%.1f", result)) + " км.");
         textView_result_refraction.setText( "С учетом рефракции - " + (String.format("%.1f", result*1.06)) + " км.");
 
     }

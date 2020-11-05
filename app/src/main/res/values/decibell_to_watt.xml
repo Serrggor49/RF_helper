@@ -2,7 +2,9 @@
 <resources>
 
 
-    <string name="distance_horizont_description">
+    <string name="decibell_to_watt">
+
+        Конвертор дБмВт -> Вт
 
 
     </string>

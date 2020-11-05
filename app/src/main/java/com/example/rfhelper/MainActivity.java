@@ -31,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#18450e'>Другое</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>RF helper</font>"));
 
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -44,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         buttons_generate(R.drawable.fresnel, "Расчет зоны Френеля", openFresnel);
-        buttons_generate(R.drawable.radiovidimost, "Дальность радиогоризонта", openDistanceHorizont);
+        buttons_generate(R.drawable.radiovidimost, "Дальность видимости", openDistanceHorizont);
         buttons_generate(R.drawable.signal_zatuhanie, "Затухание сигнала в пространстве", openSignalLossDistance);
         buttons_generate(R.drawable.antenna, "КСВ -> дБ", openSwrToPower);
         buttons_generate(R.drawable.watts, "дБмВт -> Вт", openDecibelToWatt);
         buttons_generate(R.drawable.waves, "Длина волны по частоте", openFreqToLenght);
-        buttons_generate(R.drawable.battery, "Таблица частот (в разработке)", openDecibelToWatt);
+        //buttons_generate(R.drawable.battery, "Таблица частот (в разработке)", openDecibelToWatt);
 
 
     }

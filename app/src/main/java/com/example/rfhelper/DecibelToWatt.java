@@ -3,6 +3,7 @@ package com.example.rfhelper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,15 +13,23 @@ public class DecibelToWatt extends AppCompatActivity {
 
     EditText powerDecibell;  // поле ввода мощности в dBm
     TextView powerWatt; // результат вычислений
+    int descriptions_fresnel = R.string.decibell_to_watt; // текст с описанием
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decibel_to_watt);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
+        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>дБмВт->Вт</font>"));
+
+        TextView description = findViewById(R.id.description_id); // описание
+        description.setText(descriptions_fresnel);
     }
 
 
+    @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; } // обработка назад в toolbar
 
 
     public void refresh(){

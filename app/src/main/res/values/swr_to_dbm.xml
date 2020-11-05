@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="swr_to_dbm">
+  С помощью данной таблицы можно оценить потери мощности в процентах и дБ при различных значениях КСВ.
+    </string>
+
+
+</resources>

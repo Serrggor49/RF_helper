@@ -76,13 +76,11 @@
                             android:visibility="visible" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView"
+                    <Spinner
+                        android:id="@+id/spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center|left"
-                        android:text="MHz"
                         android:visibility="invisible" />
                 </LinearLayout>
 
@@ -130,7 +128,7 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:paddingLeft="10dp"
-                        android:paddingTop="15dp"
+                        android:paddingTop="10dp"
                         android:paddingBottom="5dp"
                         android:text="λ/2, м - "
                         android:textColor="@color/Black"
@@ -146,7 +144,7 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:paddingLeft="10dp"
-                        android:paddingTop="15dp"
+                        android:paddingTop="10dp"
                         android:paddingBottom="5dp"
                         android:text="λ/4, м - "
                         android:textColor="@color/Black"
