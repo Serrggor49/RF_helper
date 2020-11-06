@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/color_accent_3">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -885,7 +885,7 @@
                                     android:background="@drawable/borders"
                                     android:gravity="center_horizontal"
                                     android:paddingLeft="5dp"
-                                    android:text="4.44"
+                                    android:text="44.4"
                                     android:textColor="@color/color_primaryo"
                                     android:textSize="16sp" />
 
