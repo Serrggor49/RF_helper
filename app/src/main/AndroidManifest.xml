@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rfhelper">
+    package="com49.example49.rfhelper">
 
     <application
         android:allowBackup="true"
@@ -10,25 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FreqToLenght"
+            android:name="com49.example49.rfhelper.FreqToLenght"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".DecibelToWatt"
+            android:name="com49.example49.rfhelper.DecibelToWatt"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SwrToPower"
+            android:name="com49.example49.rfhelper.SwrToPower"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignalLossDistance"
+            android:name="com49.example49.rfhelper.SignalLossDistance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DistanceGorizont"
+            android:name="com49.example49.rfhelper.DistanceGorizont"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FresnelZone"
+            android:name="com49.example49.rfhelper.FresnelZone"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com49.example49.rfhelper.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

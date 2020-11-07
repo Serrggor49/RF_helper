@@ -1,10 +1,12 @@
-package com.example.rfhelper;
+package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
+
+import com49.example49.rfhelper.R;
 
 public class SwrToPower extends AppCompatActivity {
 

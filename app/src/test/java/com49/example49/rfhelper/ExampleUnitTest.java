@@ -1,4 +1,4 @@
-package com.example.rfhelper;
+package com49.example49.rfhelper;
 
 import org.junit.Test;
 

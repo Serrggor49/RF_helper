@@ -1,4 +1,4 @@
-package com.example.rfhelper;
+package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com49.example49.rfhelper.R;
 
 public class DecibelToWatt extends AppCompatActivity {
 
