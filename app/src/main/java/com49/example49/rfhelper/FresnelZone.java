@@ -2,10 +2,12 @@ package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,14 @@ public class FresnelZone extends AppCompatActivity {
 
         TextView description = findViewById(R.id.description_id); // описание зоны Френеля
         description.setText(descriptions_fresnel);
+
+
+        ImageView imageView = (ImageView) findViewById(R.id.header_id);
+        imageView.setBackgroundResource(R.drawable.fresnel_animate);
+
+
+        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
+        mAnimationDrawable.start();
 
     }
 

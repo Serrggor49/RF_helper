@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/fresnel_1" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_2" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_3" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_4" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_5" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_6" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_7" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_8" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_9" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_10" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_11" android:duration="125"/>
+    <item android:drawable="@drawable/fresnel_12" android:duration="125"/>
+</animation-list>
