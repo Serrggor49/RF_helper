@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/tarelka_1" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_2" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_3" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_4" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_5" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_6" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_7" android:duration="150"/>
+    <item android:drawable="@drawable/tarelka_8" android:duration="150"/>
+
+</animation-list>

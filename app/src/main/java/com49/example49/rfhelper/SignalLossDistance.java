@@ -2,10 +2,12 @@ package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,12 @@ public class SignalLossDistance extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
         //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Затухание сигнала</font>"));
+
+
+        ImageView imageView = (ImageView) findViewById(R.id.header_id);
+        imageView.setBackgroundResource(R.drawable.zatuhanie_animate);
+        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
+        mAnimationDrawable.start();
 
         description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
         description.setText(descriptionsSignalLossDistance);

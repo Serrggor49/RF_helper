@@ -39,8 +39,6 @@ public class FresnelZone extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.header_id);
         imageView.setBackgroundResource(R.drawable.fresnel_animate);
-
-
         AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
         mAnimationDrawable.start();
 
