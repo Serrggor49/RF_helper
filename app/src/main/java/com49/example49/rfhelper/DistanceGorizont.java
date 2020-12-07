@@ -5,78 +5,69 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com49.example49.rfhelper.R;
 
 public class DistanceGorizont extends AppCompatActivity {
 
-    int descriptionsDistanceGorizont = R.string.distance_horizont_description; // текст с описанием
-    EditText firstAntHeight;  // поле ввода высоты первой антенны
-    EditText secondAntHeight;  // поле ввода высоты второй антенны
-    TextView textView_result; // результат расчета
-    TextView textView_result_refraction; // результат расчета с учетом рефракции
-    TextView description;
-
+    private String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
+    private int mDescriptionsDistanceGorizont = R.string.distance_horizont_description; // текст с описанием
+    private EditText mFirstAntHeight;  // поле ввода высоты первой антенны
+    private EditText mSecondAntHeight;  // поле ввода высоты второй антенны
+    private TextView mTextView_result; // результат расчета
+    private TextView mTextViewResultRefraction; // результат расчета с учетом рефракции
+    private TextView mDescription;
+    private Button mButtonCalc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance_gorizont);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Дальность видимости</font>"));
-
-        description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
-        description.setText(descriptionsDistanceGorizont);
-
+        init();
+        calculate();
     }
 
-    @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; } // обработка назад в toolbar
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
+    void init() {
+        mFirstAntHeight = findViewById(R.id.first_ant_height);  // высота первой антенны
+        mSecondAntHeight = findViewById(R.id.second_ant_height); // высота второй антенны
+        mTextView_result = findViewById(R.id.distance_id); // результат
+        mTextViewResultRefraction = findViewById(R.id.distance_refraction_id); // результат
 
+        mDescription = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
+        mDescription.setText(mDescriptionsDistanceGorizont);
 
-    public void refresh(){
-
-        Double heightFirstAnt = Double.parseDouble(firstAntHeight.getText().toString());
-        Double heightSecondtAnt = Double.parseDouble(secondAntHeight.getText().toString());
-
-        Double result = (   3.57*(Math.sqrt(heightFirstAnt) + Math.sqrt(heightSecondtAnt)) );
-
-        textView_result.setText( "Дальность видимости - " + (String.format("%.1f", result)) + " км.");
-        textView_result_refraction.setText( "С учетом рефракции - " + (String.format("%.1f", result*1.06)) + " км.");
-
+        mButtonCalc = findViewById(R.id.button_calc_id);
+        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculate();
+            }
+        });
     }
 
 
+    public void calculate() {
 
+        try {
+            double heightFirstAnt = Double.parseDouble(mFirstAntHeight.getText().toString());
+            double heightSecondtAnt = Double.parseDouble(mSecondAntHeight.getText().toString());
+            double result = (3.57 * (Math.sqrt(heightFirstAnt) + Math.sqrt(heightSecondtAnt)));
 
-    public void fieldsCorrect(View view){  // проверка правильности заполнения полей
-
-
-        firstAntHeight = findViewById(R.id.first_ant_height);  // высота первой антенны
-        secondAntHeight = findViewById(R.id.second_ant_height); // высота второй антенны
-        textView_result = findViewById(R.id.distance_id); // результат
-        textView_result_refraction = findViewById(R.id.distance_refraction_id); // результат
-
-
-        try
-        {
-            //double distance = Double.parseDouble(distanceEditText.getText().toString());
-            //double freq = Double.parseDouble(freqEditText.getText().toString());
-            refresh();
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-            Toast.makeText(this, "Убедитесь в правильности заполнения полей", Toast.LENGTH_LONG).show();
-
+            mTextView_result.setText("Дальность видимости - " + (String.format("%.1f", result)) + " км.");
+            mTextViewResultRefraction.setText("С учетом рефракции - " + (String.format("%.1f", result * 1.06)) + " км.");
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
-
-
-
-
     }
-
 }

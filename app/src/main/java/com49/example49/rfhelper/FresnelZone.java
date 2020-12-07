@@ -15,12 +15,12 @@ import android.widget.Toast;
 public class FresnelZone extends AppCompatActivity {
 
     final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private int mDescriptionsFresnel = R.string.descriptions_fresnel; // текст с описанием
-    private EditText mFreqEditText;  // поле ввода частоты в МГц
-    private EditText mDistanceEditText; // поле ввода расстояния в метрах
-    private TextView mTextView100; // результат 100% зоны Френеля
-    private TextView mTextView80; // результат 80% зоны Френеля
-    private TextView mTextView60; // результат 60% зоны Френеля
+    private int mDescriptionsFresnel = R.string.descriptions_fresnel;
+    private EditText mFreqEditText;
+    private EditText mDistanceEditText;
+    private TextView mTextView100;
+    private TextView mTextView80;
+    private TextView mTextView60;
     private TextView mDescription;
     private ImageView mImageHeader;
     private AnimationDrawable mAnimationDrawable;
@@ -44,11 +44,11 @@ public class FresnelZone extends AppCompatActivity {
 
 
     void init() {
-        mFreqEditText = findViewById(R.id.freq_text_edit_id);  // поле ввода частоты в МГц
-        mDistanceEditText = findViewById(R.id.distance_text_edit_id); // поле ввода расстояния в метрах
-        mTextView100 = findViewById(R.id.radius_100_id); // результат 100% зоны Френеля
-        mTextView80 = findViewById(R.id.radius_80_id); // результат 80% зоны Френеля
-        mTextView60 = findViewById(R.id.radius_60_id); // результат 60% зоны Френеля
+        mFreqEditText = findViewById(R.id.freq_text_edit_id);
+        mDistanceEditText = findViewById(R.id.distance_text_edit_id);
+        mTextView100 = findViewById(R.id.radius_100_id);
+        mTextView80 = findViewById(R.id.radius_80_id);
+        mTextView60 = findViewById(R.id.radius_60_id);
 
         mDescription = findViewById(R.id.description_id);
         mDescription.setText(mDescriptionsFresnel);
