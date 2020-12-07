@@ -4,78 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
     tools:context=".articles.Articles">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#E2E1E1"
+        android:padding="15dp"
+        android:scrollIndicators="end"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/lin_o"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollIndicators="end"
-            android:scrollbarAlwaysDrawHorizontalTrack="false"
-            android:scrollbarAlwaysDrawVerticalTrack="false"
-            android:scrollbars="none">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/lin_o"
+            <ImageButton
+                android:id="@+id/button_fresnel_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rf_help_1024_500" />
+
+            <ImageButton
+                android:id="@+id/button_dalnost_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rf_help_1024_500" />
+
+            <ImageButton
+                android:id="@+id/button_zatuhanie_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rf_help_1024_500" />
+
+            <ImageButton
+                android:id="@+id/button_ksv_to_db_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rf_help_1024_500" />
+
+            <ImageButton
+                android:id="@+id/button_dbm_to_vt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rf_help_1024_500" />
+
+            <ImageButton
+                android:id="@+id/button_lenght_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rf_help_1024_500" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/square_button"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:id="@+id/sdfsf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView8111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerInside"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="10dp"
-                            android:text="Отдельно о веганстве"
-                            android:textColor="@color/Black"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="10dp"
-                            android:text="Кто такой веган и чем он отличается от вегетарианца?"
-                            android:textColor="@color/color_primaryo"
-                            android:visibility="gone" />
-                    </LinearLayout>
-
+                        android:src="@drawable/fresnel" />
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/textView4daq"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="Расчет зоны Френеля"
+                    android:textColor="#000000"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
             </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

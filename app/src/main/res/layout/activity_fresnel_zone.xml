@@ -6,241 +6,234 @@
     android:layout_height="match_parent"
     android:background="@color/color_accent_3">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/color_accent_3"
-        android:orientation="vertical"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
-
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/lin_o"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/color_accent_3"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/header_id"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="7dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/fresnel_1"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:forceHasOverlappingRendering="false" />
 
             <LinearLayout
-                android:id="@+id/lin_o"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color_accent_3"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/header_id"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginBottom="7dp"
-                    android:adjustViewBounds="true"
-                    android:clickable="false"
-                    android:focusableInTouchMode="false"
-                    android:forceHasOverlappingRendering="false"
-                     />
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/freq_text_edit_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/freq_text_edit_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:filterTouchesWhenObscured="false"
-                            android:gravity="center"
-                            android:inputType="numberDecimal"
-                            android:lines="1"
-                            android:maxLength="16"
-                            android:textColor="@color/Black"
-                            android:textColorHint="@color/Black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/growth_bottom_id5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="-8dp"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:text="Частота, МГц"
-                            android:textSize="14sp"
-                            android:visibility="visible" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center|left"
-                        android:text="MHz"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/distance_text_edit_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:filterTouchesWhenObscured="false"
-                            android:gravity="center"
-                            android:inputType="numberDecimal"
-                            android:lines="1"
-                            android:maxLength="16"
-                            android:textColor="@color/Black"
-                            android:textColorHint="@color/Black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/growth_bottom_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="-8dp"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:text="Расстояние, м"
-                            android:textSize="14sp"
-                            android:visibility="visible" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView143"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center|left"
-                        android:text="м"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:id="@+id/radius_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="5dp"
-                        android:text="Радиус зоны, м:"
+                        android:ems="10"
+                        android:filterTouchesWhenObscured="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:maxLength="16"
+                        android:text="2400"
                         android:textColor="@color/Black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:visibility="visible"
-                        tools:shadowDx="wqedqwdqd" />
-
-                    <TextView
-                        android:id="@+id/radius_100_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="2dp"
-                        android:text="100%"
-                        android:textColor="@color/Black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:visibility="visible"
-                        tools:shadowDx="wqedqwdqd" />
-
-                    <TextView
-                        android:id="@+id/radius_80_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:text="80%"
-                        android:textColor="@color/Black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:visibility="visible"
-                        tools:shadowDx="wqedqwdqd" />
-
-                    <TextView
-                        android:id="@+id/radius_60_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:text="60%"
-                        android:textColor="@color/Black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:visibility="visible"
-                        tools:shadowDx="wqedqwdqd" />
-
-                    <Button
-                        android:id="@+id/dalee_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginBottom="18dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/around_image"
-                        android:onClick="fieldsCorrect"
-                        android:text="Рассчитать"
-                        android:textAllCaps="false"
-                        android:textColor="@color/color_accent_3"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/description_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="7dp"
-                        android:layout_weight="1"
-                        android:breakStrategy="high_quality"
-                        android:gravity="left"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="10dp"
-                        android:text="Описание"
-                        android:textColor="@color/color_primary_dark"
+                        android:textColorHint="@color/Black"
                         android:textSize="18sp" />
 
-
+                    <TextView
+                        android:id="@+id/growth_bottom_id5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-8dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Частота, МГц"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="MHz"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/distance_text_edit_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:filterTouchesWhenObscured="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:maxLength="16"
+                        android:text="1000"
+                        android:textColor="@color/Black"
+                        android:textColorHint="@color/Black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/growth_bottom_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-8dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Расстояние, м"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView143"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="м"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/radius_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="5dp"
+                    android:text="Радиус зоны, м:"
+                    android:textColor="@color/Black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:shadowDx="wqedqwdqd" />
+
+                <TextView
+                    android:id="@+id/radius_100_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="100%"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:shadowDx="wqedqwdqd" />
+
+                <TextView
+                    android:id="@+id/radius_80_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="80%"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:shadowDx="wqedqwdqd" />
+
+                <TextView
+                    android:id="@+id/radius_60_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="60%"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:shadowDx="wqedqwdqd" />
+
+                <Button
+                    android:id="@+id/button_calc_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="18dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/around_image"
+                    android:text="Рассчитать"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_accent_3"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/description_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:breakStrategy="high_quality"
+                    android:gravity="left"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="10dp"
+                    android:text="Описание"
+                    android:textColor="@color/color_primary_dark"
+                    android:textSize="18sp" />
 
 
             </LinearLayout>
-        </ScrollView>
 
-    </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
