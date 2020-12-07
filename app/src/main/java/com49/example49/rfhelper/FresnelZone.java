@@ -12,17 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com49.example49.rfhelper.R;
-
 public class FresnelZone extends AppCompatActivity {
 
     final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private int descriptions_fresnel = R.string.descriptions_fresnel; // текст с описанием
+    private int mDescriptionsFresnel = R.string.descriptions_fresnel; // текст с описанием
     private EditText mFreqEditText;  // поле ввода частоты в МГц
     private EditText mDistanceEditText; // поле ввода расстояния в метрах
-    private TextView mTextView_100; // результат 100% зоны Френеля
-    private TextView mTextView_80; // результат 80% зоны Френеля
-    private TextView mTextView_60; // результат 60% зоны Френеля
+    private TextView mTextView100; // результат 100% зоны Френеля
+    private TextView mTextView80; // результат 80% зоны Френеля
+    private TextView mTextView60; // результат 60% зоны Френеля
+    private TextView mDescription;
+    private ImageView mImageHeader;
+    private AnimationDrawable mAnimationDrawable;
+    private Button mButtonCalc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class FresnelZone extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Зона Френеля</font>"));
         init();
-
+        calculate();
     }
 
     @Override
@@ -42,58 +44,46 @@ public class FresnelZone extends AppCompatActivity {
 
 
     void init() {
-        TextView description = findViewById(R.id.description_id);
-        description.setText(descriptions_fresnel);
+        mFreqEditText = findViewById(R.id.freq_text_edit_id);  // поле ввода частоты в МГц
+        mDistanceEditText = findViewById(R.id.distance_text_edit_id); // поле ввода расстояния в метрах
+        mTextView100 = findViewById(R.id.radius_100_id); // результат 100% зоны Френеля
+        mTextView80 = findViewById(R.id.radius_80_id); // результат 80% зоны Френеля
+        mTextView60 = findViewById(R.id.radius_60_id); // результат 60% зоны Френеля
 
-        ImageView imageView = findViewById(R.id.header_id);
-        imageView.setBackgroundResource(R.drawable.fresnel_animate);
+        mDescription = findViewById(R.id.description_id);
+        mDescription.setText(mDescriptionsFresnel);
 
-        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
+        mImageHeader = findViewById(R.id.header_id);
+        mImageHeader.setBackgroundResource(R.drawable.fresnel_animate);
+
+        mAnimationDrawable = (AnimationDrawable) mImageHeader.getBackground();
         mAnimationDrawable.start();
 
-        Button buttonCalc = findViewById(R.id.button_calc_id);
-        buttonCalc.setOnClickListener(new View.OnClickListener() {
+        mButtonCalc = findViewById(R.id.button_calc_id);
+        mButtonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fieldsCorrect();
+                calculate();
             }
         });
+
+
     }
 
     public void calculate() {
-
-        double distance = Double.parseDouble(mDistanceEditText.getText().toString());
-        double freq = Double.parseDouble(mFreqEditText.getText().toString());
-
-        Double zoneDouble_100 = (17.3) * Math.sqrt((distance / (4 * freq)));
-
-        mTextView_100.setText("100% - " + String.format("%.1f", zoneDouble_100));
-        mTextView_80.setText("80% - " + (String.format("%.1f", zoneDouble_100 * 0.8)));
-        mTextView_60.setText("60% - " + (String.format("%.1f", zoneDouble_100 * 0.6)));
-    }
-
-    public void fieldsCorrect() {  // проверка правильности заполнения полей
-
-        mFreqEditText = findViewById(R.id.freq_text_edit_id);  // поле ввода частоты в МГц
-        mDistanceEditText = findViewById(R.id.distance_text_edit_id); // поле ввода расстояния в метрах
-        mTextView_100 = findViewById(R.id.radius_100_id); // результат 100% зоны Френеля
-        mTextView_80 = findViewById(R.id.radius_80_id); // результат 80% зоны Френеля
-        mTextView_60 = findViewById(R.id.radius_60_id); // результат 60% зоны Френеля
-
-
         try {
-            //double distance = Double.parseDouble(distanceEditText.getText().toString());
-            //double freq = Double.parseDouble(freqEditText.getText().toString());
-            calculate();
+            double distance = Double.parseDouble(mDistanceEditText.getText().toString());
+            double freq = Double.parseDouble(mFreqEditText.getText().toString());
+            double zoneDouble_100 = (17.3) * Math.sqrt((distance / (4 * freq)));
 
-        } catch (Exception e1) {
-            e1.printStackTrace();
+            mTextView100.setText("100% - " + String.format("%.1f", zoneDouble_100));
+            mTextView80.setText("80% - " + (String.format("%.1f", zoneDouble_100 * 0.8)));
+            mTextView60.setText("60% - " + (String.format("%.1f", zoneDouble_100 * 0.6)));
+
+        } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
-
         }
 
-
     }
-
 
 }
