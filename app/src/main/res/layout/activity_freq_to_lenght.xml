@@ -60,6 +60,7 @@
                             android:inputType="numberDecimal"
                             android:lines="1"
                             android:maxLength="16"
+                            android:text="900"
                             android:textColor="@color/Black"
                             android:textColorHint="@color/Black"
                             android:textSize="18sp" />
@@ -87,21 +88,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center|left"
-                        android:text="м"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:visibility="visible">
 
@@ -114,7 +100,7 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="5dp"
-                        android:text="λ, м - "
+                        android:text="λ, м:"
                         android:textColor="@color/Black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -130,7 +116,7 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="7dp"
                         android:paddingBottom="5dp"
-                        android:text="λ/2, м - "
+                        android:text="λ/2, м:"
                         android:textColor="@color/Black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -146,7 +132,7 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="7dp"
                         android:paddingBottom="5dp"
-                        android:text="λ/4, м - "
+                        android:text="λ/4, м:"
                         android:textColor="@color/Black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -162,7 +148,7 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="7dp"
                         android:paddingBottom="5dp"
-                        android:text="λ/8, м - "
+                        android:text="λ/8, м:"
                         android:textColor="@color/Black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -170,7 +156,7 @@
                         tools:shadowDx="wqedqwdqd" />
 
                     <Button
-                        android:id="@+id/dalee_id"
+                        android:id="@+id/button_calc_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -179,7 +165,6 @@
                         android:layout_marginBottom="18dp"
                         android:layout_weight="1"
                         android:background="@drawable/around_image"
-                        android:onClick="fieldsCorrect"
                         android:text="Рассчитать"
                         android:textAllCaps="false"
                         android:textColor="@color/color_accent_3"

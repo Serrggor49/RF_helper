@@ -61,6 +61,7 @@
                             android:inputType="numberDecimal"
                             android:lines="1"
                             android:maxLength="16"
+                            android:text="30"
                             android:textColor="@color/Black"
                             android:textColorHint="@color/Black"
                             android:textSize="18sp" />
@@ -125,7 +126,7 @@
                         tools:shadowDx="wqedqwdqd" />
 
                     <Button
-                        android:id="@+id/dalee_id"
+                        android:id="@+id/button_calc_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -134,7 +135,6 @@
                         android:layout_marginBottom="18dp"
                         android:layout_weight="1"
                         android:background="@drawable/around_image"
-                        android:onClick="fieldsCorrect"
                         android:text="Рассчитать"
                         android:textAllCaps="false"
                         android:textColor="@color/color_accent_3"
@@ -152,7 +152,8 @@
                         android:paddingTop="10dp"
                         android:text="Описание"
                         android:textColor="@color/color_primary_dark"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:visibility="gone" />
 
 
                 </LinearLayout>

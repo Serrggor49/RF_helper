@@ -5,77 +5,75 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com49.example49.rfhelper.R;
-
 public class FreqToLenght extends AppCompatActivity {
 
-    int descriptions_fresnel = R.string.freq_to_lenght; // текст с описанием
+    private String INPUT_ERROR = "Укажите частоту";
+    private int mDescriptions_fresnel = R.string.freq_to_lenght;
+    private EditText mFreqEditText;
+    private TextView mLenghtWave;
+    private TextView mLenghtWave_2;
+    private TextView mLenghtWave_4;
+    private TextView mLenghtWave_8;
+    private Button mButtonCalc;
 
-    EditText freqEditText;  // поле ввода частоты;
-    TextView lenghtWave; // результат вычислений
-    TextView lenghtWave_2; // результат вычислений
-    TextView lenghtWave_4; // результат вычислений
-    TextView lenghtWave_8; // результат вычислений
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freq_to_lenght);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_orig);  // добавляем картинку клавише назад в тулбаре
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Расчет длины волны</font>"));
+        init();
+        calculate();
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
+    void init() {
         TextView description = findViewById(R.id.description_id); // описание
-        description.setText(descriptions_fresnel);
+        description.setText(mDescriptions_fresnel);
+
+        mFreqEditText = findViewById(R.id.freq_edit_text_id);
+        mLenghtWave = findViewById(R.id.lenght_wave_id);
+        mLenghtWave_2 = findViewById(R.id.lenght_wave_id_2);
+        mLenghtWave_4 = findViewById(R.id.lenght_wave_id_4);
+        mLenghtWave_8 = findViewById(R.id.lenght_wave_id_8);
+
+        mButtonCalc = findViewById(R.id.button_calc_id);
+        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculate();
+            }
+        });
 
     }
 
-    @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; } // обработка назад в toolbar
+    public void calculate() {
 
+        try {
+            Double freq = Double.parseDouble(mFreqEditText.getText().toString());
 
-    public void refresh(){
-
-        Double freq = Double.parseDouble(freqEditText.getText().toString());
-        Double result = 299792458/(freq*1000000); // получаем результат в метрах
-
-
-        lenghtWave.setText("λ - " + String.format("%.3f", 299792458/(freq*1000000)) + " м");
-        lenghtWave_2.setText("λ/2 - " + String.format("%.3f", 299792458/(freq*1000000*2)) + " м");
-        lenghtWave_4.setText("λ/4 - " + String.format("%.3f", 299792458/(freq*1000000*4)) + " м");
-        lenghtWave_8.setText("λ/8 - " + String.format("%.3f", 299792458/(freq*1000000*8)) + " м");
-
-    }
-
-
-
-    public void fieldsCorrect(View view){  // проверка правильности заполнения полей
-
-        freqEditText = findViewById(R.id.freq_edit_text_id);
-        lenghtWave = findViewById(R.id.lenght_wave_id);
-        lenghtWave_2 = findViewById(R.id.lenght_wave_id_2);
-        lenghtWave_4 = findViewById(R.id.lenght_wave_id_4);
-        lenghtWave_8 = findViewById(R.id.lenght_wave_id_8);
-
-
-        try
-        {
-            refresh();
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-            Toast.makeText(this, "Убедитесь в правильности заполнения полей", Toast.LENGTH_LONG).show();
+            mLenghtWave.setText("λ:     " + String.format("%.3f", 299792458 / (freq * 1000000)) + " м.");
+            mLenghtWave_2.setText("λ/2:  " + String.format("%.3f", 299792458 / (freq * 1000000 * 2)) + " м.");
+            mLenghtWave_4.setText("λ/4:  " + String.format("%.3f", 299792458 / (freq * 1000000 * 4)) + " м.");
+            mLenghtWave_8.setText("λ/8:  " + String.format("%.3f", 299792458 / (freq * 1000000 * 8)) + " м.");
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
 
         }
-
-
-
-
     }
-
 
 
 }

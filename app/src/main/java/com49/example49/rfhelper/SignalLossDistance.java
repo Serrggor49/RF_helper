@@ -30,7 +30,6 @@ public class SignalLossDistance extends AppCompatActivity {
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Затухание сигнала</font>"));
         init();
         calculate();
-
     }
 
     @Override
@@ -70,7 +69,7 @@ public class SignalLossDistance extends AppCompatActivity {
             double freq = Double.parseDouble(freqEditText.getText().toString());
             double distance = Double.parseDouble(distanceEditText.getText().toString());
             Double result = (32.4 + 20 * Math.log10(freq) + 20 * Math.log10(distance));
-            textView_result.setText("Затухание сигнала составляет - " + (String.format("%.1f", result)) + " дБ.");
+            textView_result.setText("Затухание дБ: " + (String.format("%.1f", result)) + " дБ.");
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
