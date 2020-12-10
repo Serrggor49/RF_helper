@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +73,9 @@ public class DistanceGorizont extends AppCompatActivity {
                 calculate();
             }
         });
+
+        setGrayColor(mFirstAntHeight);
+        setGrayColor(mSecondAntHeight);
     }
 
 
@@ -83,6 +88,9 @@ public class DistanceGorizont extends AppCompatActivity {
 
             mTextView_result.setText("Дальность видимости: " + (String.format("%.1f", result)) + " км.");
             mTextViewResultRefraction.setText("С учетом рефракции: " + (String.format("%.1f", result * 1.06)) + " км.");
+
+            mTextView_result.setTextColor(getResources().getColor(R.color.Black));
+            mTextViewResultRefraction.setTextColor(getResources().getColor(R.color.Black));
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
@@ -100,5 +108,30 @@ public class DistanceGorizont extends AppCompatActivity {
         editor.apply();
     }
 
+
+    /**
+     * в случае внесения изменений в переданном EditText
+     * меняем цвет полученных значений на светло серый, чтобы
+     * визуально обозначить их неактуальность. После выполнения
+     * метода calculate, значения снова становятся актуальными.
+     */
+    private void setGrayColor(final EditText editText) {
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mTextView_result.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextViewResultRefraction.setTextColor(getResources().getColor(R.color.gray_light));
+            }
+        });
+    }
 
 }

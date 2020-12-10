@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,6 +75,8 @@ public class FreqToLenght extends AppCompatActivity {
             }
         });
 
+        setGrayColor(mFreqEditText);
+
     }
 
     public void calculate() {
@@ -81,6 +85,12 @@ public class FreqToLenght extends AppCompatActivity {
 
             double freq = Double.parseDouble(mFreqEditText.getText().toString());
             double lamda = 299792458 / (freq * 1000000);
+
+
+            mLenghtWave.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave_2.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave_4.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave_8.setTextColor(getResources().getColor(R.color.Black));
 
             if (lamda >= 1) {
                 mLenghtWave.setText("λ:     " + String.format("%.2f", lamda) + " м.");
@@ -119,5 +129,32 @@ public class FreqToLenght extends AppCompatActivity {
         editor.apply();
     }
 
+
+    /**
+     * в случае внесения изменений в переданном EditText
+     * меняем цвет полученных значений на светло серый, чтобы
+     * визуально обозначить их неактуальность. После выполнения
+     * метода calculate, значения снова становятся актуальными.
+     */
+    private void setGrayColor(final EditText editText) {
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mLenghtWave.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave_2.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave_4.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave_8.setTextColor(getResources().getColor(R.color.gray_light));
+            }
+        });
+    }
 
 }

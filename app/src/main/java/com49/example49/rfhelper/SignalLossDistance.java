@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,6 +79,9 @@ public class SignalLossDistance extends AppCompatActivity {
             }
         });
 
+        setGrayColor(freqEditText);
+        setGrayColor(distanceEditText);
+
     }
 
     public void calculate() {
@@ -86,6 +91,9 @@ public class SignalLossDistance extends AppCompatActivity {
             double distance = Double.parseDouble(distanceEditText.getText().toString());
             Double result = (32.4 + 20 * Math.log10(freq) + 20 * Math.log10(distance));
             textView_result.setText("Затухание дБ: " + (String.format("%.1f", result)) + " дБ.");
+
+            freqEditText.setTextColor(getResources().getColor(R.color.Black));
+            distanceEditText.setTextColor(getResources().getColor(R.color.Black));
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
@@ -101,6 +109,32 @@ public class SignalLossDistance extends AppCompatActivity {
         editor.putString(mKeyFreq, freqEditText.getText().toString());
         editor.putString(mKeyDistance, distanceEditText.getText().toString());
         editor.apply();
+    }
+
+
+    /**
+     * в случае внесения изменений в переданном EditText
+     * меняем цвет полученных значений на светло серый, чтобы
+     * визуально обозначить их неактуальность. После выполнения
+     * метода calculate, значения снова становятся актуальными.
+     */
+    private void setGrayColor(final EditText editText) {
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                freqEditText.setTextColor(getResources().getColor(R.color.gray_light));
+                distanceEditText.setTextColor(getResources().getColor(R.color.gray_light));
+            }
+        });
     }
 
 }

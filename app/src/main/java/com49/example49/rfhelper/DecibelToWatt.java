@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +65,8 @@ public class DecibelToWatt extends AppCompatActivity {
                 calculate();
             }
         });
+
+        setGrayColor(mPowerDecibellEdit);
     }
 
 
@@ -71,6 +75,7 @@ public class DecibelToWatt extends AppCompatActivity {
         try {
             double powerDbm = Double.parseDouble(mPowerDecibellEdit.getText().toString());
             double powerWt = (Math.pow(10, (powerDbm / 10))); // мощность в мВт
+            mPowerWatt.setTextColor(getResources().getColor(R.color.Black));
 
             if (powerWt >= 1000) {  // если мощность свыше 1000 мВт, то отображаем ее в Вт
                 powerWt = powerWt / 1000;
@@ -92,6 +97,31 @@ public class DecibelToWatt extends AppCompatActivity {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(mKeyPower, mPowerDecibellEdit.getText().toString());
         editor.apply();
+    }
+
+
+    /**
+     * в случае внесения изменений в переданном EditText
+     * меняем цвет полученных значений на светло серый, чтобы
+     * визуально обозначить их неактуальность. После выполнения
+     * метода calculate, значения снова становятся актуальными.
+     */
+    private void setGrayColor(final EditText editText) {
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mPowerWatt.setTextColor(getResources().getColor(R.color.gray_light));
+            }
+        });
     }
 
 

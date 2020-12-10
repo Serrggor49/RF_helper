@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -86,6 +88,8 @@ public class FresnelZone extends AppCompatActivity {
             }
         });
 
+        setGrayColor(mFreqEditText);
+        setGrayColor(mDistanceEditText);
     }
 
     public void calculate() {
@@ -97,6 +101,10 @@ public class FresnelZone extends AppCompatActivity {
             mTextView100.setText("100% - " + String.format("%.1f", zoneDouble_100));
             mTextView80.setText("80% - " + (String.format("%.1f", zoneDouble_100 * 0.8)));
             mTextView60.setText("60% - " + (String.format("%.1f", zoneDouble_100 * 0.6)));
+
+            mTextView100.setTextColor(getResources().getColor(R.color.Black));
+            mTextView80.setTextColor(getResources().getColor(R.color.Black));
+            mTextView60.setTextColor(getResources().getColor(R.color.Black));
 
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
@@ -110,10 +118,37 @@ public class FresnelZone extends AppCompatActivity {
         super.onPause();
 
         SharedPreferences.Editor editor = mSettings.edit();
-
         editor.putString(mKeylastFreq, mFreqEditText.getText().toString());
         editor.putString(mKeylastDistance, mDistanceEditText.getText().toString());
         editor.apply();
+    }
+
+
+
+    /**
+     * в случае внесения изменений в переданном EditText
+     * меняем цвет полученных значений на светло серый, чтобы
+     * визуально обозначить их неактуальность. После выполнения
+     * метода calculate, значения снова становятся актуальными.
+     */
+    private void setGrayColor(final EditText editText) {
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mTextView100.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextView80.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextView60.setTextColor(getResources().getColor(R.color.gray_light));
+            }
+        });
     }
 
 
