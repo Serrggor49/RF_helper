@@ -61,10 +61,10 @@ public class SignalLossDistance extends AppCompatActivity {
         textView_result = findViewById(R.id.loss_id); // результат
 
         ImageView imageView = findViewById(R.id.header_id);
-        imageView.setBackgroundResource(R.drawable.zatuhanie_animate);
+        imageView.setBackgroundResource(R.drawable.loss_signal);
 
-        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
-        mAnimationDrawable.start();
+//        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
+//        mAnimationDrawable.start();
 
         description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
         description.setText(descriptionsSignalLossDistance);
