@@ -2,6 +2,8 @@ package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -21,6 +23,11 @@ public class FreqToLenght extends AppCompatActivity {
     private TextView mLenghtWave_8;
     private Button mButtonCalc;
 
+    private String FREQ_DEFAULT = "30";
+    private String mKeyFreq = "mKeyFreq";
+    private SharedPreferences mSettings;
+    final String APP_PREFERENCES = "FreqToLenght";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +36,8 @@ public class FreqToLenght extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Расчет длины волны</font>"));
         init();
+        getLastValues();
         calculate();
-
     }
 
     @Override
@@ -38,6 +45,14 @@ public class FreqToLenght extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mFreqEditText.setText(mSettings.getString(mKeyFreq, FREQ_DEFAULT));
+    }
+
+
 
 
     void init() {
@@ -63,16 +78,45 @@ public class FreqToLenght extends AppCompatActivity {
     public void calculate() {
 
         try {
-            Double freq = Double.parseDouble(mFreqEditText.getText().toString());
 
-            mLenghtWave.setText("λ:     " + String.format("%.3f", 299792458 / (freq * 1000000)) + " м.");
-            mLenghtWave_2.setText("λ/2:  " + String.format("%.3f", 299792458 / (freq * 1000000 * 2)) + " м.");
-            mLenghtWave_4.setText("λ/4:  " + String.format("%.3f", 299792458 / (freq * 1000000 * 4)) + " м.");
-            mLenghtWave_8.setText("λ/8:  " + String.format("%.3f", 299792458 / (freq * 1000000 * 8)) + " м.");
+            double freq = Double.parseDouble(mFreqEditText.getText().toString());
+            double lamda = 299792458 / (freq * 1000000);
+
+            if (lamda >= 1) {
+                mLenghtWave.setText("λ:     " + String.format("%.2f", lamda) + " м.");
+                mLenghtWave_2.setText("λ/2:  " + String.format("%.2f", (lamda / 2)) + " м.");
+                mLenghtWave_4.setText("λ/4:  " + String.format("%.2f", (lamda / 4)) + " м.");
+                mLenghtWave_8.setText("λ/8:  " + String.format("%.2f", (lamda / 8)) + " м.");
+            }
+            else if (lamda>0.01 ) {
+                mLenghtWave.setText("λ:     " + String.format("%.3f", lamda * 100) + " cм.");
+                mLenghtWave_2.setText("λ/2:  " + String.format("%.3f", (lamda * 100 / 2)) + " cм.");
+                mLenghtWave_4.setText("λ/4:  " + String.format("%.3f", (lamda * 100 / 4)) + " cм.");
+                mLenghtWave_8.setText("λ/8:  " + String.format("%.3f", (lamda * 100 / 8)) + " cм.");
+            }
+
+            else {
+                mLenghtWave.setText("λ:     " + String.format("%.3f", lamda * 1000) + " мм.");
+                mLenghtWave_2.setText("λ/2:  " + String.format("%.3f", (lamda * 1000 / 2)) + " мм.");
+                mLenghtWave_4.setText("λ/4:  " + String.format("%.3f", (lamda * 1000 / 4)) + " мм.");
+                mLenghtWave_8.setText("λ/8:  " + String.format("%.3f", (lamda * 1000 / 8)) + " мм.");
+            }
+
+
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
 
         }
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(mKeyFreq, mFreqEditText.getText().toString());
+        editor.apply();
     }
 
 

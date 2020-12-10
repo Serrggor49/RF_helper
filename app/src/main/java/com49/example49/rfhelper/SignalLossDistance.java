@@ -2,6 +2,8 @@ package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -22,6 +24,13 @@ public class SignalLossDistance extends AppCompatActivity {
     private TextView description;
     private Button mButtonCalc;
 
+    private String FREQ_DEFAULT = "2400";
+    private String DISTANCE_DEFAULT = "1000";
+    private String mKeyFreq = "mKeyFreq";
+    private String mKeyDistance = "mKeyDistance";
+    private SharedPreferences mSettings;
+    final String APP_PREFERENCES = "SignalLossDistance";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +38,7 @@ public class SignalLossDistance extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Затухание сигнала</font>"));
         init();
+        getLastValues();
         calculate();
     }
 
@@ -36,6 +46,12 @@ public class SignalLossDistance extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        freqEditText.setText(mSettings.getString(mKeyFreq, FREQ_DEFAULT));
+        distanceEditText.setText( mSettings.getString(mKeyDistance, DISTANCE_DEFAULT));
     }
 
     void init() {
@@ -74,6 +90,17 @@ public class SignalLossDistance extends AppCompatActivity {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences.Editor editor = mSettings.edit();
+
+        editor.putString(mKeyFreq, freqEditText.getText().toString());
+        editor.putString(mKeyDistance, distanceEditText.getText().toString());
+        editor.apply();
     }
 
 }

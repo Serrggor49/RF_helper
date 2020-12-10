@@ -2,6 +2,8 @@ package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -26,6 +28,14 @@ public class FresnelZone extends AppCompatActivity {
     private AnimationDrawable mAnimationDrawable;
     private Button mButtonCalc;
 
+
+    private String FREQ_DEFAULT = "900";
+    private String DISTANCE_DEFAULT = "2000";
+    private String mKeylastFreq = "mKeylastFreq";
+    private String mKeylastDistance = "mKeylastDistance";
+    private SharedPreferences mSettings;
+    final String APP_PREFERENCES = "FresnelZone";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,7 @@ public class FresnelZone extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Зона Френеля</font>"));
         init();
+        getLastValues();
         calculate();
     }
 
@@ -42,6 +53,14 @@ public class FresnelZone extends AppCompatActivity {
         return true;
     }
 
+
+    void getLastValues() {
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        mFreqEditText.setText(mSettings.getString(mKeylastFreq, FREQ_DEFAULT));
+        mDistanceEditText.setText(mSettings.getString(mKeylastDistance, DISTANCE_DEFAULT));
+    }
 
     void init() {
         mFreqEditText = findViewById(R.id.freq_text_edit_id);
@@ -67,7 +86,6 @@ public class FresnelZone extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void calculate() {
@@ -85,5 +103,18 @@ public class FresnelZone extends AppCompatActivity {
         }
 
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences.Editor editor = mSettings.edit();
+
+        editor.putString(mKeylastFreq, mFreqEditText.getText().toString());
+        editor.putString(mKeylastDistance, mDistanceEditText.getText().toString());
+        editor.apply();
+    }
+
 
 }

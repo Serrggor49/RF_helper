@@ -2,6 +2,8 @@ package com49.example49.rfhelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -19,6 +21,11 @@ public class DecibelToWatt extends AppCompatActivity {
     private TextView mDescription;
     private Button mButtonCalc;
 
+    private String POWER_DBM_DEFAULT = "30";
+    private String mKeyPower = "mKeyPower";
+    private SharedPreferences mSettings;
+    final String APP_PREFERENCES = "DecibelToWatt";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,7 @@ public class DecibelToWatt extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>дБмВт->Вт</font>"));
         init();
+        getLastValues();
         calculate();
 
     }
@@ -36,6 +44,10 @@ public class DecibelToWatt extends AppCompatActivity {
         return true;
     }
 
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mPowerDecibellEdit.setText(mSettings.getString(mKeyPower, POWER_DBM_DEFAULT));
+    }
 
     void init() {
         mDescription = findViewById(R.id.description_id); // описание
@@ -62,9 +74,9 @@ public class DecibelToWatt extends AppCompatActivity {
 
             if (powerWt >= 1000) {  // если мощность свыше 1000 мВт, то отображаем ее в Вт
                 powerWt = powerWt / 1000;
-                mPowerWatt.setText("Мощность " + String.format("%.1f", powerWt) + " Вт");
+                mPowerWatt.setText("Мощность: " + String.format("%.1f", powerWt) + " Вт");
             } else {
-                mPowerWatt.setText("Мощность " + String.format("%.0f", powerWt) + " мВт");
+                mPowerWatt.setText("Мощность: " + String.format("%.0f", powerWt) + " мВт");
             }
 
         } catch (NumberFormatException e) {
@@ -72,6 +84,16 @@ public class DecibelToWatt extends AppCompatActivity {
         }
 
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(mKeyPower, mPowerDecibellEdit.getText().toString());
+        editor.apply();
+    }
+
 
 
 }
