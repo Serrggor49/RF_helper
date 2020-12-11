@@ -60,7 +60,7 @@ public class FresnelZone extends AppCompatActivity {
     }
 
     void init() {
-        TextView mDescription = findViewById(R.id.description_id);
+        TextView description = findViewById(R.id.description_id);
         ImageView mImageHeader = findViewById(R.id.header_id);
         Button mButtonCalc = findViewById(R.id.button_calc_id);
         mFreqEditText = findViewById(R.id.freq_text_edit_id);
@@ -69,7 +69,7 @@ public class FresnelZone extends AppCompatActivity {
         mTextView80 = findViewById(R.id.radius_80_id);
         mTextView60 = findViewById(R.id.radius_60_id);
         mImageHeader.setBackgroundResource(HEADER);
-        mDescription.setText(DESCRIPTION);
+        description.setText(DESCRIPTION);
 
         AnimationDrawable mAnimationDrawable = (AnimationDrawable) mImageHeader.getBackground();
         mAnimationDrawable.start();

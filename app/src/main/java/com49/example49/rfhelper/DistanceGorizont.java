@@ -19,13 +19,14 @@ import android.widget.Toast;
 public class DistanceGorizont extends AppCompatActivity {
 
     private static final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private static final int DESCRIPTION = R.string.distance_horizont_description; // текст с описанием
     private static final String HEIGHT_FIRST_ANT_DEFAULT = "20";
     private static final String HEIGHT_SECOND_ANT_DEFAULT = "5";
     private static final String KEY_HEIGHT_FIRST_ANT = "KEY_HEIGHT_FIRST_ANT";
     private static final String KEY_HEIGHT_SECOND_ANT = "KEY_HEIGHT_SECOND_ANT";
     private static final String APP_PREFERENCES = "DistanceGorizont";
+    private static final String BAR_TITLE = "<font color='#f4fcf2'>Дальность видимости</font>";
     private static final int HEADER = R.drawable.header_distance_horizont;
+    private static final int DESCRIPTION = R.string.distance_horizont_description; // текст с описанием
 
 
     private EditText mFirstAntHeight;  // поле ввода высоты первой антенны
@@ -39,7 +40,7 @@ public class DistanceGorizont extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance_gorizont);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Дальность видимости</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
@@ -59,7 +60,7 @@ public class DistanceGorizont extends AppCompatActivity {
     }
 
     void init() {
-        TextView mDescription = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
+        TextView description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
         Button mButtonCalc = findViewById(R.id.button_calc_id);
         ImageView mImageHeader = findViewById(R.id.header_id);
 
@@ -67,10 +68,10 @@ public class DistanceGorizont extends AppCompatActivity {
         mSecondAntHeight = findViewById(R.id.second_ant_height); // высота второй антенны
         mTextView_result = findViewById(R.id.distance_id); // результат
         mTextViewResultRefraction = findViewById(R.id.distance_refraction_id); // результат
-        mDescription.setText(DESCRIPTION);
+        description.setText(DESCRIPTION);
 
         mImageHeader.setBackgroundResource(HEADER);
-        mDescription.setText(DESCRIPTION);
+        description.setText(DESCRIPTION);
 
 
         mButtonCalc.setOnClickListener(new View.OnClickListener() {

@@ -16,28 +16,26 @@ import android.widget.Toast;
 
 public class DecibelToWatt extends AppCompatActivity {
 
-    private final String INPUT_ERROR = "Укажите мощность сигнала в dBm";
+    private static final int DESCRIPTION = R.string.decibell_to_watt; // текст с описанием
+    private static final String INPUT_ERROR = "Укажите мощность сигнала в dBm";
+    private static final String BAR_TITLE = "<font color='#f4fcf2'>дБмВт->Вт</font>";
+    private static final String POWER_DBM_DEFAULT = "30";
+    private static final String KEY_POWER = "KEY_POWER";
+    private static final String APP_PREFERENCES = "DecibelToWatt";
+
     private EditText mPowerDecibellEdit;  // поле ввода мощности в dBm
     private TextView mPowerWatt; // результат вычислений
-    private int mDescriptionsFresnel = R.string.decibell_to_watt; // текст с описанием
-    private TextView mDescription;
-    private Button mButtonCalc;
-
-    private String POWER_DBM_DEFAULT = "30";
-    private String mKeyPower = "mKeyPower";
     private SharedPreferences mSettings;
-    final String APP_PREFERENCES = "DecibelToWatt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decibel_to_watt);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>дБмВт->Вт</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
-
     }
 
     @Override
@@ -48,17 +46,17 @@ public class DecibelToWatt extends AppCompatActivity {
 
     void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mPowerDecibellEdit.setText(mSettings.getString(mKeyPower, POWER_DBM_DEFAULT));
+        mPowerDecibellEdit.setText(mSettings.getString(KEY_POWER, POWER_DBM_DEFAULT));
     }
 
     void init() {
-        mDescription = findViewById(R.id.description_id); // описание
-        mDescription.setText(mDescriptionsFresnel);
+        TextView mDescription = findViewById(R.id.description_id); // описание
+        mDescription.setText(DESCRIPTION);
 
         mPowerDecibellEdit = findViewById(R.id.power_decibell_id);
         mPowerWatt = findViewById(R.id.power_watt_id);
 
-        mButtonCalc = findViewById(R.id.button_calc_id);
+        Button mButtonCalc = findViewById(R.id.button_calc_id);
         mButtonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +93,7 @@ public class DecibelToWatt extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(mKeyPower, mPowerDecibellEdit.getText().toString());
+        editor.putString(KEY_POWER, mPowerDecibellEdit.getText().toString());
         editor.apply();
     }
 

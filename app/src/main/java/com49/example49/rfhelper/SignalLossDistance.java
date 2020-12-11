@@ -18,27 +18,28 @@ import android.widget.Toast;
 
 public class SignalLossDistance extends AppCompatActivity {
 
-    private String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private int descriptionsSignalLossDistance = R.string.signal_loss_distance; // текст с описанием
+    private static final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
+    private static final String FREQ_DEFAULT = "2400";
+    private static final String DISTANCE_DEFAULT = "1000";
+    private static final String KEY_FREQ = "KEY_FREQ";
+    private static final String KEY_DISTANCE = "KEY_DISTANCE";
+    private static final String APP_PREFERENCES = "SignalLossDistance";
+    private static final String BAR_TITLE = "<font color='#f4fcf2'>Затухание сигнала</font>";
+    private static final int DESCRIPTION = R.string.signal_loss_distance; // текст с описанием
+
     private EditText freqEditText;  // поле ввода частоты сигнала
     private EditText distanceEditText;  // поле ввода частоты сигнала
-    private TextView textView_result; // результат расчета
-    private TextView description;
-    private Button mButtonCalc;
-
-    private String FREQ_DEFAULT = "2400";
-    private String DISTANCE_DEFAULT = "1000";
-    private String mKeyFreq = "mKeyFreq";
-    private String mKeyDistance = "mKeyDistance";
+    private TextView textViewResult; // результат расчета
     private SharedPreferences mSettings;
-    final String APP_PREFERENCES = "SignalLossDistance";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signal_loss_distance);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Затухание сигнала</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
@@ -52,26 +53,22 @@ public class SignalLossDistance extends AppCompatActivity {
 
     void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        freqEditText.setText(mSettings.getString(mKeyFreq, FREQ_DEFAULT));
-        distanceEditText.setText( mSettings.getString(mKeyDistance, DISTANCE_DEFAULT));
+        freqEditText.setText(mSettings.getString(KEY_FREQ, FREQ_DEFAULT));
+        distanceEditText.setText( mSettings.getString(KEY_DISTANCE, DISTANCE_DEFAULT));
     }
 
     void init() {
-
-        freqEditText = findViewById(R.id.freq_id);  // частота
-        distanceEditText = findViewById(R.id.distance_id); // расстояние
-        textView_result = findViewById(R.id.loss_id); // результат
-
         ImageView imageView = findViewById(R.id.header_id);
         imageView.setBackgroundResource(R.drawable.loss_signal);
 
-//        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
-//        mAnimationDrawable.start();
+        TextView description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
+        description.setText(DESCRIPTION);
 
-        description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
-        description.setText(descriptionsSignalLossDistance);
+        freqEditText = findViewById(R.id.freq_id);  // частота
+        distanceEditText = findViewById(R.id.distance_id); // расстояние
+        textViewResult = findViewById(R.id.loss_id); // результат
 
-        mButtonCalc = findViewById(R.id.button_calc_id);
+        Button mButtonCalc = findViewById(R.id.button_calc_id);
         mButtonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,10 +87,9 @@ public class SignalLossDistance extends AppCompatActivity {
             double freq = Double.parseDouble(freqEditText.getText().toString());
             double distance = Double.parseDouble(distanceEditText.getText().toString());
             Double result = (32.4 + 20 * Math.log10(freq) + 20 * Math.log10(distance));
-            textView_result.setText("Затухание дБ: " + (String.format("%.1f", result)) + " дБ.");
+            textViewResult.setText("Затухание дБ: " + (String.format("%.1f", result)) + " дБ.");
 
-            freqEditText.setTextColor(getResources().getColor(R.color.Black));
-            distanceEditText.setTextColor(getResources().getColor(R.color.Black));
+            textViewResult.setTextColor(getResources().getColor(R.color.Black));
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
@@ -106,8 +102,8 @@ public class SignalLossDistance extends AppCompatActivity {
 
         SharedPreferences.Editor editor = mSettings.edit();
 
-        editor.putString(mKeyFreq, freqEditText.getText().toString());
-        editor.putString(mKeyDistance, distanceEditText.getText().toString());
+        editor.putString(KEY_FREQ, freqEditText.getText().toString());
+        editor.putString(KEY_DISTANCE, distanceEditText.getText().toString());
         editor.apply();
     }
 
@@ -131,8 +127,7 @@ public class SignalLossDistance extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                freqEditText.setTextColor(getResources().getColor(R.color.gray_light));
-                distanceEditText.setTextColor(getResources().getColor(R.color.gray_light));
+                textViewResult.setTextColor(getResources().getColor(R.color.gray_light));
             }
         });
     }
