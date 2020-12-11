@@ -16,27 +16,28 @@ import android.widget.Toast;
 
 public class FreqToLenght extends AppCompatActivity {
 
-    private String INPUT_ERROR = "Укажите частоту";
-    private int mDescriptions_fresnel = R.string.freq_to_lenght;
+    private static final String INPUT_ERROR = "Укажите частоту";
+    private static final String FREQ_DEFAULT = "30";
+    private static final String KEY_FREQ = "mKeyFreq";
+    private static final String APP_PREFERENCES = "FreqToLenght";
+    private static final int DESCRIPTION = R.string.freq_to_lenght; // текст с описанием
+    private static final String BAR_TITLE = "<font color='#f4fcf2'>Расчет длины волны</font>";
+
+
+
     private EditText mFreqEditText;
     private TextView mLenghtWave;
     private TextView mLenghtWave_2;
     private TextView mLenghtWave_4;
     private TextView mLenghtWave_8;
-    private Button mButtonCalc;
-
-    private String FREQ_DEFAULT = "30";
-    private String mKeyFreq = "mKeyFreq";
     private SharedPreferences mSettings;
-    final String APP_PREFERENCES = "FreqToLenght";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freq_to_lenght);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Расчет длины волны</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
@@ -51,15 +52,12 @@ public class FreqToLenght extends AppCompatActivity {
 
     void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mFreqEditText.setText(mSettings.getString(mKeyFreq, FREQ_DEFAULT));
+        mFreqEditText.setText(mSettings.getString(KEY_FREQ, FREQ_DEFAULT));
     }
-
-
-
 
     void init() {
         TextView description = findViewById(R.id.description_id); // описание
-        description.setText(mDescriptions_fresnel);
+        description.setText(DESCRIPTION);
 
         mFreqEditText = findViewById(R.id.freq_edit_text_id);
         mLenghtWave = findViewById(R.id.lenght_wave_id);
@@ -67,7 +65,7 @@ public class FreqToLenght extends AppCompatActivity {
         mLenghtWave_4 = findViewById(R.id.lenght_wave_id_4);
         mLenghtWave_8 = findViewById(R.id.lenght_wave_id_8);
 
-        mButtonCalc = findViewById(R.id.button_calc_id);
+        Button mButtonCalc = findViewById(R.id.button_calc_id);
         mButtonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,10 +80,8 @@ public class FreqToLenght extends AppCompatActivity {
     public void calculate() {
 
         try {
-
             double freq = Double.parseDouble(mFreqEditText.getText().toString());
             double lamda = 299792458 / (freq * 1000000);
-
 
             mLenghtWave.setTextColor(getResources().getColor(R.color.Black));
             mLenghtWave_2.setTextColor(getResources().getColor(R.color.Black));
@@ -119,13 +115,11 @@ public class FreqToLenght extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(mKeyFreq, mFreqEditText.getText().toString());
+        editor.putString(KEY_FREQ, mFreqEditText.getText().toString());
         editor.apply();
     }
 
