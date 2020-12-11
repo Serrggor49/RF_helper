@@ -75,7 +75,7 @@ public class FreqToLenght extends AppCompatActivity {
             }
         });
 
-        setGrayColor(mFreqEditText);
+        setGrayColorForResult(mFreqEditText);
 
     }
 
@@ -130,13 +130,13 @@ public class FreqToLenght extends AppCompatActivity {
     }
 
 
-    /**
-     * в случае внесения изменений в переданном EditText
-     * меняем цвет полученных значений на светло серый, чтобы
+    /*
+     * в случае внесения изменений в EditText
+     * меняем цвет вычислений на светло серый, чтобы
      * визуально обозначить их неактуальность. После выполнения
      * метода calculate, значения снова становятся актуальными.
      */
-    private void setGrayColor(final EditText editText) {
+    private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

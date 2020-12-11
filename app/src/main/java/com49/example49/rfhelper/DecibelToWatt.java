@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class DecibelToWatt extends AppCompatActivity {
 
-    private String INPUT_ERROR = "Укажите мощность сигнала в dBm";
+    private final String INPUT_ERROR = "Укажите мощность сигнала в dBm";
     private EditText mPowerDecibellEdit;  // поле ввода мощности в dBm
     private TextView mPowerWatt; // результат вычислений
     private int mDescriptionsFresnel = R.string.decibell_to_watt; // текст с описанием
@@ -66,7 +66,7 @@ public class DecibelToWatt extends AppCompatActivity {
             }
         });
 
-        setGrayColor(mPowerDecibellEdit);
+        setGrayColorForResult(mPowerDecibellEdit);
     }
 
 
@@ -100,13 +100,13 @@ public class DecibelToWatt extends AppCompatActivity {
     }
 
 
-    /**
-     * в случае внесения изменений в переданном EditText
-     * меняем цвет полученных значений на светло серый, чтобы
+    /*
+     * в случае внесения изменений в EditText
+     * меняем цвет вычислений на светло серый, чтобы
      * визуально обозначить их неактуальность. После выполнения
      * метода calculate, значения снова становятся актуальными.
      */
-    private void setGrayColor(final EditText editText) {
+    private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

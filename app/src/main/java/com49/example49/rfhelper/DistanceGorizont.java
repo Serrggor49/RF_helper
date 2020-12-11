@@ -11,27 +11,28 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class DistanceGorizont extends AppCompatActivity {
 
-    private String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private int mDescriptionsDistanceGorizont = R.string.distance_horizont_description; // текст с описанием
+    private static final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
+    private static final int DESCRIPTION = R.string.distance_horizont_description; // текст с описанием
+    private static final String HEIGHT_FIRST_ANT_DEFAULT = "20";
+    private static final String HEIGHT_SECOND_ANT_DEFAULT = "5";
+    private static final String KEY_HEIGHT_FIRST_ANT = "KEY_HEIGHT_FIRST_ANT";
+    private static final String KEY_HEIGHT_SECOND_ANT = "KEY_HEIGHT_SECOND_ANT";
+    private static final String APP_PREFERENCES = "DistanceGorizont";
+    private static final int HEADER = R.drawable.header_distance_horizont;
+
+
     private EditText mFirstAntHeight;  // поле ввода высоты первой антенны
     private EditText mSecondAntHeight;  // поле ввода высоты второй антенны
     private TextView mTextView_result; // результат расчета
     private TextView mTextViewResultRefraction; // результат расчета с учетом рефракции
-    private TextView mDescription;
-    private Button mButtonCalc;
-
-    private String HEIGHT_FIRST_ANT_DEFAULT = "20";
-    private String HEIGHT_SECOND_ANT_DEFAULT = "5";
-    private String mKeyHeightFirstAnt = "mKeyHeightFirstAnt";
-    private String mKeyHeightSecondAnt = "mKeyHeightSecondAnt";
     private SharedPreferences mSettings;
-    final String APP_PREFERENCES = "DistanceGorizont";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,20 +54,25 @@ public class DistanceGorizont extends AppCompatActivity {
 
     void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mFirstAntHeight.setText(mSettings.getString(mKeyHeightFirstAnt, HEIGHT_FIRST_ANT_DEFAULT));
-        mSecondAntHeight.setText(mSettings.getString(mKeyHeightSecondAnt, HEIGHT_SECOND_ANT_DEFAULT));
+        mFirstAntHeight.setText(mSettings.getString(KEY_HEIGHT_FIRST_ANT, HEIGHT_FIRST_ANT_DEFAULT));
+        mSecondAntHeight.setText(mSettings.getString(KEY_HEIGHT_SECOND_ANT, HEIGHT_SECOND_ANT_DEFAULT));
     }
 
     void init() {
+        TextView mDescription = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
+        Button mButtonCalc = findViewById(R.id.button_calc_id);
+        ImageView mImageHeader = findViewById(R.id.header_id);
+
         mFirstAntHeight = findViewById(R.id.first_ant_height);  // высота первой антенны
         mSecondAntHeight = findViewById(R.id.second_ant_height); // высота второй антенны
         mTextView_result = findViewById(R.id.distance_id); // результат
         mTextViewResultRefraction = findViewById(R.id.distance_refraction_id); // результат
+        mDescription.setText(DESCRIPTION);
 
-        mDescription = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
-        mDescription.setText(mDescriptionsDistanceGorizont);
+        mImageHeader.setBackgroundResource(HEADER);
+        mDescription.setText(DESCRIPTION);
 
-        mButtonCalc = findViewById(R.id.button_calc_id);
+
         mButtonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,8 +80,8 @@ public class DistanceGorizont extends AppCompatActivity {
             }
         });
 
-        setGrayColor(mFirstAntHeight);
-        setGrayColor(mSecondAntHeight);
+        setGrayColorForResult(mFirstAntHeight);
+        setGrayColorForResult(mSecondAntHeight);
     }
 
 
@@ -103,19 +109,19 @@ public class DistanceGorizont extends AppCompatActivity {
 
         SharedPreferences.Editor editor = mSettings.edit();
 
-        editor.putString(mKeyHeightFirstAnt, mFirstAntHeight.getText().toString());
-        editor.putString(mKeyHeightSecondAnt, mSecondAntHeight.getText().toString());
+        editor.putString(KEY_HEIGHT_FIRST_ANT, mFirstAntHeight.getText().toString());
+        editor.putString(KEY_HEIGHT_SECOND_ANT, mSecondAntHeight.getText().toString());
         editor.apply();
     }
 
 
-    /**
-     * в случае внесения изменений в переданном EditText
-     * меняем цвет полученных значений на светло серый, чтобы
+    /*
+     * в случае внесения изменений в EditText
+     * меняем цвет вычислений на светло серый, чтобы
      * визуально обозначить их неактуальность. После выполнения
      * метода calculate, значения снова становятся актуальными.
      */
-    private void setGrayColor(final EditText editText) {
+    private void setGrayColorForResult (final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

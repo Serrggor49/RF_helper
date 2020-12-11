@@ -18,32 +18,29 @@ import android.widget.Toast;
 
 public class FresnelZone extends AppCompatActivity {
 
-    final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private int mDescriptionsFresnel = R.string.descriptions_fresnel;
+    private static final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
+    private static final String BAR_TITLE = "<font color='#f4fcf2'>Зона Френеля</font>";
+    private static final String FREQ_DEFAULT = "900";
+    private static final String DISTANCE_DEFAULT = "2000";
+    private static final String KEY_LAST_FREQ = "KEY_LAST_FREQ";
+    private static final String KEY_LAST_DISTANCE = "KEY_LAST_DISTANCE";
+    private static final String APP_PREFERENCES = "FresnelZone";
+    private static final int HEADER = R.drawable.fresnel_animate;
+    private static final int DESCRIPTION = R.string.descriptions_fresnel;
+
     private EditText mFreqEditText;
     private EditText mDistanceEditText;
     private TextView mTextView100;
     private TextView mTextView80;
     private TextView mTextView60;
-    private TextView mDescription;
-    private ImageView mImageHeader;
-    private AnimationDrawable mAnimationDrawable;
-    private Button mButtonCalc;
-
-
-    private String FREQ_DEFAULT = "900";
-    private String DISTANCE_DEFAULT = "2000";
-    private String mKeylastFreq = "mKeylastFreq";
-    private String mKeylastDistance = "mKeylastDistance";
     private SharedPreferences mSettings;
-    final String APP_PREFERENCES = "FresnelZone";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fresnel_zone);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#f4fcf2'>Зона Френеля</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
@@ -57,30 +54,26 @@ public class FresnelZone extends AppCompatActivity {
 
 
     void getLastValues() {
-
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
-        mFreqEditText.setText(mSettings.getString(mKeylastFreq, FREQ_DEFAULT));
-        mDistanceEditText.setText(mSettings.getString(mKeylastDistance, DISTANCE_DEFAULT));
+        mFreqEditText.setText(mSettings.getString(KEY_LAST_FREQ, FREQ_DEFAULT));
+        mDistanceEditText.setText(mSettings.getString(KEY_LAST_DISTANCE, DISTANCE_DEFAULT));
     }
 
     void init() {
+        TextView mDescription = findViewById(R.id.description_id);
+        ImageView mImageHeader = findViewById(R.id.header_id);
+        Button mButtonCalc = findViewById(R.id.button_calc_id);
         mFreqEditText = findViewById(R.id.freq_text_edit_id);
         mDistanceEditText = findViewById(R.id.distance_text_edit_id);
         mTextView100 = findViewById(R.id.radius_100_id);
         mTextView80 = findViewById(R.id.radius_80_id);
         mTextView60 = findViewById(R.id.radius_60_id);
+        mImageHeader.setBackgroundResource(HEADER);
+        mDescription.setText(DESCRIPTION);
 
-        mDescription = findViewById(R.id.description_id);
-        mDescription.setText(mDescriptionsFresnel);
-
-        mImageHeader = findViewById(R.id.header_id);
-        mImageHeader.setBackgroundResource(R.drawable.fresnel_animate);
-
-        mAnimationDrawable = (AnimationDrawable) mImageHeader.getBackground();
+        AnimationDrawable mAnimationDrawable = (AnimationDrawable) mImageHeader.getBackground();
         mAnimationDrawable.start();
 
-        mButtonCalc = findViewById(R.id.button_calc_id);
         mButtonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,8 +81,8 @@ public class FresnelZone extends AppCompatActivity {
             }
         });
 
-        setGrayColor(mFreqEditText);
-        setGrayColor(mDistanceEditText);
+        setGrayColorForResult(mFreqEditText);
+        setGrayColorForResult(mDistanceEditText);
     }
 
     public void calculate() {
@@ -109,29 +102,25 @@ public class FresnelZone extends AppCompatActivity {
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
-
     }
-
 
     @Override
     protected void onPause() {
         super.onPause();
 
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(mKeylastFreq, mFreqEditText.getText().toString());
-        editor.putString(mKeylastDistance, mDistanceEditText.getText().toString());
+        editor.putString(KEY_LAST_FREQ, mFreqEditText.getText().toString());
+        editor.putString(KEY_LAST_DISTANCE, mDistanceEditText.getText().toString());
         editor.apply();
     }
 
-
-
-    /**
-     * в случае внесения изменений в переданном EditText
-     * меняем цвет полученных значений на светло серый, чтобы
+    /*
+     * в случае внесения изменений в EditText
+     * меняем цвет вычислений на светло серый, чтобы
      * визуально обозначить их неактуальность. После выполнения
      * метода calculate, значения снова становятся актуальными.
      */
-    private void setGrayColor(final EditText editText) {
+    private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
