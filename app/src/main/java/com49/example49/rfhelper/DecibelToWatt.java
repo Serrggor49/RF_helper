@@ -50,13 +50,13 @@ public class DecibelToWatt extends AppCompatActivity {
     }
 
     void init() {
-        TextView mDescription = findViewById(R.id.description_id); // описание
-        Button mButtonCalc = findViewById(R.id.button_calc_id);
+        TextView description = findViewById(R.id.description_id); // описание
+        Button buttonCalc = findViewById(R.id.button_calc_id);
         mPowerDecibellEdit = findViewById(R.id.power_decibell_id);
         mPowerWatt = findViewById(R.id.power_watt_id);
-        mDescription.setText(DESCRIPTION);
+        description.setText(DESCRIPTION);
 
-        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+        buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calculate();

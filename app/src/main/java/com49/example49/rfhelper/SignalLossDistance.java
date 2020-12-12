@@ -68,8 +68,8 @@ public class SignalLossDistance extends AppCompatActivity {
         distanceEditText = findViewById(R.id.distance_id); // расстояние
         textViewResult = findViewById(R.id.loss_id); // результат
 
-        Button mButtonCalc = findViewById(R.id.button_calc_id);
-        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+        Button buttonCalc = findViewById(R.id.button_calc_id);
+        buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calculate();

@@ -46,12 +46,11 @@ public class FresnelZone extends AppCompatActivity {
         calculate();
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return true;
+//    }
 
     void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -61,20 +60,20 @@ public class FresnelZone extends AppCompatActivity {
 
     void init() {
         TextView description = findViewById(R.id.description_id);
-        ImageView mImageHeader = findViewById(R.id.header_id);
-        Button mButtonCalc = findViewById(R.id.button_calc_id);
+        ImageView imageHeader = findViewById(R.id.header_id);
+        Button buttonCalc = findViewById(R.id.button_calc_id);
         mFreqEditText = findViewById(R.id.freq_text_edit_id);
         mDistanceEditText = findViewById(R.id.distance_text_edit_id);
         mTextView100 = findViewById(R.id.radius_100_id);
         mTextView80 = findViewById(R.id.radius_80_id);
         mTextView60 = findViewById(R.id.radius_60_id);
-        mImageHeader.setBackgroundResource(HEADER);
+        imageHeader.setBackgroundResource(HEADER);
         description.setText(DESCRIPTION);
 
-        AnimationDrawable mAnimationDrawable = (AnimationDrawable) mImageHeader.getBackground();
+        AnimationDrawable mAnimationDrawable = (AnimationDrawable) imageHeader.getBackground();
         mAnimationDrawable.start();
 
-        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+        buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calculate();
@@ -120,6 +119,7 @@ public class FresnelZone extends AppCompatActivity {
      * визуально обозначить их неактуальность. После выполнения
      * метода calculate, значения снова становятся актуальными.
      */
+
     private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {

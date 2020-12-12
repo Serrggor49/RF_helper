@@ -31,7 +31,7 @@ public class DistanceGorizont extends AppCompatActivity {
 
     private EditText mFirstAntHeight;  // поле ввода высоты первой антенны
     private EditText mSecondAntHeight;  // поле ввода высоты второй антенны
-    private TextView mTextView_result; // результат расчета
+    private TextView mTextViewResult; // результат расчета
     private TextView mTextViewResultRefraction; // результат расчета с учетом рефракции
     private SharedPreferences mSettings;
 
@@ -61,20 +61,20 @@ public class DistanceGorizont extends AppCompatActivity {
 
     void init() {
         TextView description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
-        Button mButtonCalc = findViewById(R.id.button_calc_id);
-        ImageView mImageHeader = findViewById(R.id.header_id);
+        Button buttonCalc = findViewById(R.id.button_calc_id);
+        ImageView imageHeader = findViewById(R.id.header_id);
 
         mFirstAntHeight = findViewById(R.id.first_ant_height);  // высота первой антенны
         mSecondAntHeight = findViewById(R.id.second_ant_height); // высота второй антенны
-        mTextView_result = findViewById(R.id.distance_id); // результат
+        mTextViewResult = findViewById(R.id.distance_id); // результат
         mTextViewResultRefraction = findViewById(R.id.distance_refraction_id); // результат
         description.setText(DESCRIPTION);
 
-        mImageHeader.setBackgroundResource(HEADER);
+        imageHeader.setBackgroundResource(HEADER);
         description.setText(DESCRIPTION);
 
 
-        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+        buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calculate();
@@ -93,10 +93,10 @@ public class DistanceGorizont extends AppCompatActivity {
             double heightSecondtAnt = Double.parseDouble(mSecondAntHeight.getText().toString());
             double result = (3.57 * (Math.sqrt(heightFirstAnt) + Math.sqrt(heightSecondtAnt)));
 
-            mTextView_result.setText("Дальность видимости: " + (String.format("%.1f", result)) + " км.");
+            mTextViewResult.setText("Дальность видимости: " + (String.format("%.1f", result)) + " км.");
             mTextViewResultRefraction.setText("С учетом рефракции: " + (String.format("%.1f", result * 1.06)) + " км.");
 
-            mTextView_result.setTextColor(getResources().getColor(R.color.Black));
+            mTextViewResult.setTextColor(getResources().getColor(R.color.Black));
             mTextViewResultRefraction.setTextColor(getResources().getColor(R.color.Black));
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
@@ -135,7 +135,7 @@ public class DistanceGorizont extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mTextView_result.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextViewResult.setTextColor(getResources().getColor(R.color.gray_light));
                 mTextViewResultRefraction.setTextColor(getResources().getColor(R.color.gray_light));
             }
         });

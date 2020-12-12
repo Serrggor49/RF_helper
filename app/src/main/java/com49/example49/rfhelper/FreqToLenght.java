@@ -27,9 +27,9 @@ public class FreqToLenght extends AppCompatActivity {
 
     private EditText mFreqEditText;
     private TextView mLenghtWave;
-    private TextView mLenghtWave_2;
-    private TextView mLenghtWave_4;
-    private TextView mLenghtWave_8;
+    private TextView mLenghtWave2;
+    private TextView mLenghtWave4;
+    private TextView mLenghtWave8;
     private SharedPreferences mSettings;
 
     @Override
@@ -61,12 +61,12 @@ public class FreqToLenght extends AppCompatActivity {
 
         mFreqEditText = findViewById(R.id.freq_edit_text_id);
         mLenghtWave = findViewById(R.id.lenght_wave_id);
-        mLenghtWave_2 = findViewById(R.id.lenght_wave_id_2);
-        mLenghtWave_4 = findViewById(R.id.lenght_wave_id_4);
-        mLenghtWave_8 = findViewById(R.id.lenght_wave_id_8);
+        mLenghtWave2 = findViewById(R.id.lenght_wave_id_2);
+        mLenghtWave4 = findViewById(R.id.lenght_wave_id_4);
+        mLenghtWave8 = findViewById(R.id.lenght_wave_id_8);
 
-        Button mButtonCalc = findViewById(R.id.button_calc_id);
-        mButtonCalc.setOnClickListener(new View.OnClickListener() {
+        Button buttonCalc = findViewById(R.id.button_calc_id);
+        buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calculate();
@@ -84,28 +84,28 @@ public class FreqToLenght extends AppCompatActivity {
             double lamda = 299792458 / (freq * 1000000);
 
             mLenghtWave.setTextColor(getResources().getColor(R.color.Black));
-            mLenghtWave_2.setTextColor(getResources().getColor(R.color.Black));
-            mLenghtWave_4.setTextColor(getResources().getColor(R.color.Black));
-            mLenghtWave_8.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave2.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave4.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave8.setTextColor(getResources().getColor(R.color.Black));
 
             if (lamda >= 1) {
                 mLenghtWave.setText("λ:     " + String.format("%.2f", lamda) + " м.");
-                mLenghtWave_2.setText("λ/2:  " + String.format("%.2f", (lamda / 2)) + " м.");
-                mLenghtWave_4.setText("λ/4:  " + String.format("%.2f", (lamda / 4)) + " м.");
-                mLenghtWave_8.setText("λ/8:  " + String.format("%.2f", (lamda / 8)) + " м.");
+                mLenghtWave2.setText("λ/2:  " + String.format("%.2f", (lamda / 2)) + " м.");
+                mLenghtWave4.setText("λ/4:  " + String.format("%.2f", (lamda / 4)) + " м.");
+                mLenghtWave8.setText("λ/8:  " + String.format("%.2f", (lamda / 8)) + " м.");
             }
             else if (lamda>0.01 ) {
                 mLenghtWave.setText("λ:     " + String.format("%.3f", lamda * 100) + " cм.");
-                mLenghtWave_2.setText("λ/2:  " + String.format("%.3f", (lamda * 100 / 2)) + " cм.");
-                mLenghtWave_4.setText("λ/4:  " + String.format("%.3f", (lamda * 100 / 4)) + " cм.");
-                mLenghtWave_8.setText("λ/8:  " + String.format("%.3f", (lamda * 100 / 8)) + " cм.");
+                mLenghtWave2.setText("λ/2:  " + String.format("%.3f", (lamda * 100 / 2)) + " cм.");
+                mLenghtWave4.setText("λ/4:  " + String.format("%.3f", (lamda * 100 / 4)) + " cм.");
+                mLenghtWave8.setText("λ/8:  " + String.format("%.3f", (lamda * 100 / 8)) + " cм.");
             }
 
             else {
                 mLenghtWave.setText("λ:     " + String.format("%.3f", lamda * 1000) + " мм.");
-                mLenghtWave_2.setText("λ/2:  " + String.format("%.3f", (lamda * 1000 / 2)) + " мм.");
-                mLenghtWave_4.setText("λ/4:  " + String.format("%.3f", (lamda * 1000 / 4)) + " мм.");
-                mLenghtWave_8.setText("λ/8:  " + String.format("%.3f", (lamda * 1000 / 8)) + " мм.");
+                mLenghtWave2.setText("λ/2:  " + String.format("%.3f", (lamda * 1000 / 2)) + " мм.");
+                mLenghtWave4.setText("λ/4:  " + String.format("%.3f", (lamda * 1000 / 4)) + " мм.");
+                mLenghtWave8.setText("λ/8:  " + String.format("%.3f", (lamda * 1000 / 8)) + " мм.");
             }
 
 
@@ -144,9 +144,9 @@ public class FreqToLenght extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 mLenghtWave.setTextColor(getResources().getColor(R.color.gray_light));
-                mLenghtWave_2.setTextColor(getResources().getColor(R.color.gray_light));
-                mLenghtWave_4.setTextColor(getResources().getColor(R.color.gray_light));
-                mLenghtWave_8.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave2.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave4.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave8.setTextColor(getResources().getColor(R.color.gray_light));
             }
         });
     }
