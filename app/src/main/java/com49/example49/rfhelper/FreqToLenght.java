@@ -23,8 +23,6 @@ public class FreqToLenght extends AppCompatActivity {
     private static final int DESCRIPTION = R.string.freq_to_lenght; // текст с описанием
     private static final String BAR_TITLE = "<font color='#f4fcf2'>Расчет длины волны</font>";
 
-
-
     private EditText mFreqEditText;
     private TextView mLenghtWave;
     private TextView mLenghtWave2;
@@ -44,15 +42,11 @@ public class FreqToLenght extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-
-    void getLastValues() {
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mFreqEditText.setText(mSettings.getString(KEY_FREQ, FREQ_DEFAULT));
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(KEY_FREQ, mFreqEditText.getText().toString());
+        editor.apply();
     }
 
     void init() {
@@ -74,7 +68,11 @@ public class FreqToLenght extends AppCompatActivity {
         });
 
         setGrayColorForResult(mFreqEditText);
+    }
 
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mFreqEditText.setText(mSettings.getString(KEY_FREQ, FREQ_DEFAULT));
     }
 
     public void calculate() {
@@ -93,15 +91,12 @@ public class FreqToLenght extends AppCompatActivity {
                 mLenghtWave2.setText("λ/2:  " + String.format("%.2f", (lamda / 2)) + " м.");
                 mLenghtWave4.setText("λ/4:  " + String.format("%.2f", (lamda / 4)) + " м.");
                 mLenghtWave8.setText("λ/8:  " + String.format("%.2f", (lamda / 8)) + " м.");
-            }
-            else if (lamda>0.01 ) {
+            } else if (lamda > 0.01) {
                 mLenghtWave.setText("λ:     " + String.format("%.3f", lamda * 100) + " cм.");
                 mLenghtWave2.setText("λ/2:  " + String.format("%.3f", (lamda * 100 / 2)) + " cм.");
                 mLenghtWave4.setText("λ/4:  " + String.format("%.3f", (lamda * 100 / 4)) + " cм.");
                 mLenghtWave8.setText("λ/8:  " + String.format("%.3f", (lamda * 100 / 8)) + " cм.");
-            }
-
-            else {
+            } else {
                 mLenghtWave.setText("λ:     " + String.format("%.3f", lamda * 1000) + " мм.");
                 mLenghtWave2.setText("λ/2:  " + String.format("%.3f", (lamda * 1000 / 2)) + " мм.");
                 mLenghtWave4.setText("λ/4:  " + String.format("%.3f", (lamda * 1000 / 4)) + " мм.");
@@ -115,21 +110,6 @@ public class FreqToLenght extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(KEY_FREQ, mFreqEditText.getText().toString());
-        editor.apply();
-    }
-
-
-    /*
-     * в случае внесения изменений в EditText
-     * меняем цвет вычислений на светло серый, чтобы
-     * визуально обозначить их неактуальность. После выполнения
-     * метода calculate, значения снова становятся актуальными.
-     */
     private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -150,5 +130,12 @@ public class FreqToLenght extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
 }

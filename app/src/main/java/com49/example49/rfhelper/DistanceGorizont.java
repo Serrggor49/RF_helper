@@ -28,7 +28,6 @@ public class DistanceGorizont extends AppCompatActivity {
     private static final int HEADER = R.drawable.header_distance_horizont;
     private static final int DESCRIPTION = R.string.distance_horizont_description; // текст с описанием
 
-
     private EditText mFirstAntHeight;  // поле ввода высоты первой антенны
     private EditText mSecondAntHeight;  // поле ввода высоты второй антенны
     private TextView mTextViewResult; // результат расчета
@@ -47,16 +46,14 @@ public class DistanceGorizont extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+    protected void onPause() {
+        super.onPause();
 
+        SharedPreferences.Editor editor = mSettings.edit();
 
-    void getLastValues() {
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mFirstAntHeight.setText(mSettings.getString(KEY_HEIGHT_FIRST_ANT, HEIGHT_FIRST_ANT_DEFAULT));
-        mSecondAntHeight.setText(mSettings.getString(KEY_HEIGHT_SECOND_ANT, HEIGHT_SECOND_ANT_DEFAULT));
+        editor.putString(KEY_HEIGHT_FIRST_ANT, mFirstAntHeight.getText().toString());
+        editor.putString(KEY_HEIGHT_SECOND_ANT, mSecondAntHeight.getText().toString());
+        editor.apply();
     }
 
     void init() {
@@ -85,6 +82,11 @@ public class DistanceGorizont extends AppCompatActivity {
         setGrayColorForResult(mSecondAntHeight);
     }
 
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mFirstAntHeight.setText(mSettings.getString(KEY_HEIGHT_FIRST_ANT, HEIGHT_FIRST_ANT_DEFAULT));
+        mSecondAntHeight.setText(mSettings.getString(KEY_HEIGHT_SECOND_ANT, HEIGHT_SECOND_ANT_DEFAULT));
+    }
 
     public void calculate() {
 
@@ -103,26 +105,7 @@ public class DistanceGorizont extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        SharedPreferences.Editor editor = mSettings.edit();
-
-        editor.putString(KEY_HEIGHT_FIRST_ANT, mFirstAntHeight.getText().toString());
-        editor.putString(KEY_HEIGHT_SECOND_ANT, mSecondAntHeight.getText().toString());
-        editor.apply();
-    }
-
-
-    /*
-     * в случае внесения изменений в EditText
-     * меняем цвет вычислений на светло серый, чтобы
-     * визуально обозначить их неактуальность. После выполнения
-     * метода calculate, значения снова становятся актуальными.
-     */
-    private void setGrayColorForResult (final EditText editText) {
+    private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,4 +124,9 @@ public class DistanceGorizont extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

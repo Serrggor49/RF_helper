@@ -46,16 +46,14 @@ public class FresnelZone extends AppCompatActivity {
         calculate();
     }
 
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        onBackPressed();
-//        return true;
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    void getLastValues() {
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mFreqEditText.setText(mSettings.getString(KEY_LAST_FREQ, FREQ_DEFAULT));
-        mDistanceEditText.setText(mSettings.getString(KEY_LAST_DISTANCE, DISTANCE_DEFAULT));
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(KEY_LAST_FREQ, mFreqEditText.getText().toString());
+        editor.putString(KEY_LAST_DISTANCE, mDistanceEditText.getText().toString());
+        editor.apply();
     }
 
     void init() {
@@ -84,15 +82,21 @@ public class FresnelZone extends AppCompatActivity {
         setGrayColorForResult(mDistanceEditText);
     }
 
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mFreqEditText.setText(mSettings.getString(KEY_LAST_FREQ, FREQ_DEFAULT));
+        mDistanceEditText.setText(mSettings.getString(KEY_LAST_DISTANCE, DISTANCE_DEFAULT));
+    }
+
     public void calculate() {
         try {
             double distance = Double.parseDouble(mDistanceEditText.getText().toString());
             double freq = Double.parseDouble(mFreqEditText.getText().toString());
-            double zoneDouble_100 = (17.3) * Math.sqrt((distance / (4 * freq)));
+            double zoneDouble100 = (17.3) * Math.sqrt((distance / (4 * freq)));
 
-            mTextView100.setText("100% - " + String.format("%.1f", zoneDouble_100));
-            mTextView80.setText("80% - " + (String.format("%.1f", zoneDouble_100 * 0.8)));
-            mTextView60.setText("60% - " + (String.format("%.1f", zoneDouble_100 * 0.6)));
+            mTextView100.setText("100% - " + String.format("%.1f", zoneDouble100));
+            mTextView80.setText("80% - " + (String.format("%.1f", zoneDouble100 * 0.8)));
+            mTextView60.setText("60% - " + (String.format("%.1f", zoneDouble100 * 0.6)));
 
             mTextView100.setTextColor(getResources().getColor(R.color.Black));
             mTextView80.setTextColor(getResources().getColor(R.color.Black));
@@ -102,24 +106,7 @@ public class FresnelZone extends AppCompatActivity {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(KEY_LAST_FREQ, mFreqEditText.getText().toString());
-        editor.putString(KEY_LAST_DISTANCE, mDistanceEditText.getText().toString());
-        editor.apply();
-    }
-
-    /*
-     * в случае внесения изменений в EditText
-     * меняем цвет вычислений на светло серый, чтобы
-     * визуально обозначить их неактуальность. После выполнения
-     * метода calculate, значения снова становятся актуальными.
-     */
-
+    
     private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -139,6 +126,16 @@ public class FresnelZone extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
+
+
 
 
 }

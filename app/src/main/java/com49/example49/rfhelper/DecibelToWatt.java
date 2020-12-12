@@ -39,14 +39,11 @@ public class DecibelToWatt extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    void getLastValues() {
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        mPowerDecibellEdit.setText(mSettings.getString(KEY_POWER, POWER_DBM_DEFAULT));
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(KEY_POWER, mPowerDecibellEdit.getText().toString());
+        editor.apply();
     }
 
     void init() {
@@ -66,6 +63,10 @@ public class DecibelToWatt extends AppCompatActivity {
         setGrayColorForResult(mPowerDecibellEdit);
     }
 
+    void getLastValues() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mPowerDecibellEdit.setText(mSettings.getString(KEY_POWER, POWER_DBM_DEFAULT));
+    }
 
     public void calculate() {
 
@@ -87,22 +88,6 @@ public class DecibelToWatt extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(KEY_POWER, mPowerDecibellEdit.getText().toString());
-        editor.apply();
-    }
-
-
-    /*
-     * в случае внесения изменений в EditText
-     * меняем цвет вычислений на светло серый, чтобы
-     * визуально обозначить их неактуальность. После выполнения
-     * метода calculate, значения снова становятся актуальными.
-     */
     private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -121,6 +106,10 @@ public class DecibelToWatt extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 }
