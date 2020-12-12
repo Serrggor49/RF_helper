@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +20,7 @@ public class FreqToLenght extends AppCompatActivity {
     private static final String KEY_FREQ = "mKeyFreq";
     private static final String APP_PREFERENCES = "FreqToLenght";
     private static final int DESCRIPTION = R.string.freq_to_lenght; // текст с описанием
-    private static final String BAR_TITLE = "<font color='#f4fcf2'>Расчет длины волны</font>";
+    private static final String BAR_TITLE = "Расчет длины волны";
 
     private EditText mFreqEditText;
     private TextView mLenghtWave;
@@ -34,11 +33,14 @@ public class FreqToLenght extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freq_to_lenght);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(BAR_TITLE);
+        }
     }
 
     @Override
@@ -49,7 +51,7 @@ public class FreqToLenght extends AppCompatActivity {
         editor.apply();
     }
 
-    void init() {
+    private void init() {
         TextView description = findViewById(R.id.description_id); // описание
         description.setText(DESCRIPTION);
 
@@ -70,21 +72,21 @@ public class FreqToLenght extends AppCompatActivity {
         setGrayColorForResult(mFreqEditText);
     }
 
-    void getLastValues() {
+    private void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         mFreqEditText.setText(mSettings.getString(KEY_FREQ, FREQ_DEFAULT));
     }
 
-    public void calculate() {
+    private void calculate() {
 
         try {
             double freq = Double.parseDouble(mFreqEditText.getText().toString());
             double lamda = 299792458 / (freq * 1000000);
 
-            mLenghtWave.setTextColor(getResources().getColor(R.color.Black));
-            mLenghtWave2.setTextColor(getResources().getColor(R.color.Black));
-            mLenghtWave4.setTextColor(getResources().getColor(R.color.Black));
-            mLenghtWave8.setTextColor(getResources().getColor(R.color.Black));
+            mLenghtWave.setTextColor(getColor(R.color.Black));
+            mLenghtWave2.setTextColor(getColor(R.color.Black));
+            mLenghtWave4.setTextColor(getColor(R.color.Black));
+            mLenghtWave8.setTextColor(getColor(R.color.Black));
 
             if (lamda >= 1) {
                 mLenghtWave.setText("λ:     " + String.format("%.2f", lamda) + " м.");
@@ -123,10 +125,10 @@ public class FreqToLenght extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mLenghtWave.setTextColor(getResources().getColor(R.color.gray_light));
-                mLenghtWave2.setTextColor(getResources().getColor(R.color.gray_light));
-                mLenghtWave4.setTextColor(getResources().getColor(R.color.gray_light));
-                mLenghtWave8.setTextColor(getResources().getColor(R.color.gray_light));
+                mLenghtWave.setTextColor(getColor(R.color.gray_light));
+                mLenghtWave2.setTextColor(getColor(R.color.gray_light));
+                mLenghtWave4.setTextColor(getColor(R.color.gray_light));
+                mLenghtWave8.setTextColor(getColor(R.color.gray_light));
             }
         });
     }

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,7 @@ public class DistanceGorizont extends AppCompatActivity {
     private static final String KEY_HEIGHT_FIRST_ANT = "KEY_HEIGHT_FIRST_ANT";
     private static final String KEY_HEIGHT_SECOND_ANT = "KEY_HEIGHT_SECOND_ANT";
     private static final String APP_PREFERENCES = "DistanceGorizont";
-    private static final String BAR_TITLE = "<font color='#f4fcf2'>Дальность видимости</font>";
+    private static final String BAR_TITLE = "Дальность видимости";
     private static final int HEADER = R.drawable.header_distance_horizont;
     private static final int DESCRIPTION = R.string.distance_horizont_description; // текст с описанием
 
@@ -38,11 +37,14 @@ public class DistanceGorizont extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance_gorizont);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(BAR_TITLE);
+        }
     }
 
     @Override
@@ -56,7 +58,7 @@ public class DistanceGorizont extends AppCompatActivity {
         editor.apply();
     }
 
-    void init() {
+    private void init() {
         TextView description = findViewById(R.id.description_id); // добавили описание что такое радиогоризонт
         Button buttonCalc = findViewById(R.id.button_calc_id);
         ImageView imageHeader = findViewById(R.id.header_id);
@@ -82,13 +84,13 @@ public class DistanceGorizont extends AppCompatActivity {
         setGrayColorForResult(mSecondAntHeight);
     }
 
-    void getLastValues() {
+    private void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         mFirstAntHeight.setText(mSettings.getString(KEY_HEIGHT_FIRST_ANT, HEIGHT_FIRST_ANT_DEFAULT));
         mSecondAntHeight.setText(mSettings.getString(KEY_HEIGHT_SECOND_ANT, HEIGHT_SECOND_ANT_DEFAULT));
     }
 
-    public void calculate() {
+    private void calculate() {
 
         try {
             double heightFirstAnt = Double.parseDouble(mFirstAntHeight.getText().toString());
@@ -98,8 +100,8 @@ public class DistanceGorizont extends AppCompatActivity {
             mTextViewResult.setText("Дальность видимости: " + (String.format("%.1f", result)) + " км.");
             mTextViewResultRefraction.setText("С учетом рефракции: " + (String.format("%.1f", result * 1.06)) + " км.");
 
-            mTextViewResult.setTextColor(getResources().getColor(R.color.Black));
-            mTextViewResultRefraction.setTextColor(getResources().getColor(R.color.Black));
+            mTextViewResult.setTextColor(getColor(R.color.Black));
+            mTextViewResultRefraction.setTextColor(getColor(R.color.Black));
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
@@ -118,8 +120,8 @@ public class DistanceGorizont extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mTextViewResult.setTextColor(getResources().getColor(R.color.gray_light));
-                mTextViewResultRefraction.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextViewResult.setTextColor(getColor(R.color.gray_light));
+                mTextViewResultRefraction.setTextColor(getColor(R.color.gray_light));
             }
         });
     }

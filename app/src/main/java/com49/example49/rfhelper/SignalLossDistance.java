@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +22,7 @@ public class SignalLossDistance extends AppCompatActivity {
     private static final String KEY_FREQ = "KEY_FREQ";
     private static final String KEY_DISTANCE = "KEY_DISTANCE";
     private static final String APP_PREFERENCES = "SignalLossDistance";
-    private static final String BAR_TITLE = "<font color='#f4fcf2'>Затухание сигнала</font>";
+    private static final String BAR_TITLE = "Затухание сигнала";
     private static final int DESCRIPTION = R.string.signal_loss_distance; // текст с описанием
 
     private EditText mFreqEditText;  // поле ввода частоты сигнала
@@ -36,11 +34,14 @@ public class SignalLossDistance extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signal_loss_distance);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // включает отображение стрелочки назад в тулбаре
-        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(BAR_TITLE);
+        }
     }
 
     @Override
@@ -54,7 +55,7 @@ public class SignalLossDistance extends AppCompatActivity {
         editor.apply();
     }
 
-    void init() {
+    private void init() {
         ImageView imageView = findViewById(R.id.header_id);
         imageView.setBackgroundResource(R.drawable.loss_signal);
 
@@ -78,13 +79,13 @@ public class SignalLossDistance extends AppCompatActivity {
 
     }
 
-    void getLastValues() {
+    private void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         mFreqEditText.setText(mSettings.getString(KEY_FREQ, FREQ_DEFAULT));
         mDistanceEditText.setText(mSettings.getString(KEY_DISTANCE, DISTANCE_DEFAULT));
     }
 
-    public void calculate() {
+    private void calculate() {
 
         try {
             double freq = Double.parseDouble(mFreqEditText.getText().toString());
@@ -92,7 +93,7 @@ public class SignalLossDistance extends AppCompatActivity {
             Double result = (32.4 + 20 * Math.log10(freq) + 20 * Math.log10(distance));
             mTextViewResult.setText("Затухание дБ: " + (String.format("%.1f", result)) + " дБ.");
 
-            mTextViewResult.setTextColor(getResources().getColor(R.color.Black));
+            mTextViewResult.setTextColor(getColor(R.color.Black));
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
@@ -112,7 +113,7 @@ public class SignalLossDistance extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mTextViewResult.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextViewResult.setTextColor(getColor(R.color.gray_light));
             }
         });
     }

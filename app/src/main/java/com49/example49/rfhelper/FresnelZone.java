@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 public class FresnelZone extends AppCompatActivity {
 
     private static final String INPUT_ERROR = "Убедитесь в правильности заполнения полей";
-    private static final String BAR_TITLE = "<font color='#f4fcf2'>Зона Френеля</font>";
+    private static final String BAR_TITLE = "Зона Френеля";
     private static final String FREQ_DEFAULT = "900";
     private static final String DISTANCE_DEFAULT = "2000";
     private static final String KEY_LAST_FREQ = "KEY_LAST_FREQ";
@@ -39,11 +38,14 @@ public class FresnelZone extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fresnel_zone);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(Html.fromHtml(BAR_TITLE));
         init();
         getLastValues();
         calculate();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(BAR_TITLE);
+        }
     }
 
     @Override
@@ -56,7 +58,7 @@ public class FresnelZone extends AppCompatActivity {
         editor.apply();
     }
 
-    void init() {
+    private void init() {
         TextView description = findViewById(R.id.description_id);
         ImageView imageHeader = findViewById(R.id.header_id);
         Button buttonCalc = findViewById(R.id.button_calc_id);
@@ -82,13 +84,13 @@ public class FresnelZone extends AppCompatActivity {
         setGrayColorForResult(mDistanceEditText);
     }
 
-    void getLastValues() {
+    private void getLastValues() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         mFreqEditText.setText(mSettings.getString(KEY_LAST_FREQ, FREQ_DEFAULT));
         mDistanceEditText.setText(mSettings.getString(KEY_LAST_DISTANCE, DISTANCE_DEFAULT));
     }
 
-    public void calculate() {
+    private void calculate() {
         try {
             double distance = Double.parseDouble(mDistanceEditText.getText().toString());
             double freq = Double.parseDouble(mFreqEditText.getText().toString());
@@ -98,15 +100,15 @@ public class FresnelZone extends AppCompatActivity {
             mTextView80.setText("80% - " + (String.format("%.1f", zoneDouble100 * 0.8)));
             mTextView60.setText("60% - " + (String.format("%.1f", zoneDouble100 * 0.6)));
 
-            mTextView100.setTextColor(getResources().getColor(R.color.Black));
-            mTextView80.setTextColor(getResources().getColor(R.color.Black));
-            mTextView60.setTextColor(getResources().getColor(R.color.Black));
+            mTextView100.setTextColor(getColor(R.color.Black));
+            mTextView80.setTextColor(getColor(R.color.Black));
+            mTextView60.setTextColor(getColor(R.color.Black));
 
         } catch (NumberFormatException e) {
             Toast.makeText(this, INPUT_ERROR, Toast.LENGTH_LONG).show();
         }
     }
-    
+
     private void setGrayColorForResult(final EditText editText) {
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -120,9 +122,9 @@ public class FresnelZone extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mTextView100.setTextColor(getResources().getColor(R.color.gray_light));
-                mTextView80.setTextColor(getResources().getColor(R.color.gray_light));
-                mTextView60.setTextColor(getResources().getColor(R.color.gray_light));
+                mTextView100.setTextColor(getColor(R.color.gray_light));
+                mTextView80.setTextColor(getColor(R.color.gray_light));
+                mTextView60.setTextColor(getColor(R.color.gray_light));
             }
         });
     }
