@@ -72,7 +72,6 @@ public class DistanceGorizont extends AppCompatActivity {
         imageHeader.setBackgroundResource(HEADER);
         description.setText(DESCRIPTION);
 
-
         buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
